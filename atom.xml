@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Hexo</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2018-03-22T13:42:02.257Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>John Doe</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android onSaveInstanceState调用时机</title>
+    <link href="http://yoursite.com/2018/03/22/Android-onSaveInstanceState%E8%B0%83%E7%94%A8%E6%97%B6%E6%9C%BA/"/>
+    <id>http://yoursite.com/2018/03/22/Android-onSaveInstanceState调用时机/</id>
+    <published>2018-03-22T06:50:54.000Z</published>
+    <updated>2018-03-22T13:42:02.257Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近项目中PM加了个需求，要做一个Android应用内通知，即当App在前台收到相应通知消息时，在屏幕顶部展示一个通知（并非系统Notification）。由于种种原因，最后技术选型将应用内通知选择作为一个activity，也就是在当前activity上弹出一个背景透明的activity。然后我发现下层的activity在onPause之后调用了onSaveInstanceState方法，why？难道onSaveInstanceState不是在activity异常销毁的时候才会调用吗？我们用onSaveInstanceState来保存activity状态，但是onSaveInstanceState真正的调用时机是什么？本文将对onSaveInstanceState方法的调用时机一探究竟。</p><p>##onSaveInstanceState介绍<br>首先看一下<a href="https://developer.android.com/reference/android/app/Activity.html#onSaveInstanceState\(android.os.Bundle\" target="_blank" rel="noopener">onSaveInstanceState</a>)官方API介绍。</p><blockquote><p>Called to retrieve per-instance state from an activity before being killed so that the state can be restored in onCreate(Bundle) or onRestoreInstanceState(Bundle) (the Bundle populated by this method will be passed to both).</p></blockquote><blockquote><p>This method is called before an activity may be killed so that when it comes back some time in the future it can restore its state. For example, if activity B is launched in front of activity A, and at some point activity A is killed to reclaim resources, activity A will have a chance to save the current state of its user interface via this method so that when the user returns to activity A, the state of the user interface can be restored via onCreate(Bundle) or onRestoreInstanceState(Bundle).</p></blockquote><blockquote><p>Do not confuse this method with activity lifecycle callbacks such as onPause(), which is always called when an activity is being placed in the background or on its way to destruction, or onStop() which is called before destruction. One example of when onPause() and onStop() is called and not this method is when a user navigates back from activity B to activity A: there is no need to call onSaveInstanceState(Bundle) on B because that particular instance will never be restored, so the system avoids calling it. An example when onPause() is called and not onSaveInstanceState(Bundle) is when activity B is launched in front of activity A: the system may avoid calling onSaveInstanceState(Bundle) on activity A if it isn’t killed during the lifetime of B since the state of the user interface of A will stay intact.</p></blockquote><blockquote><p>The default implementation takes care of most of the UI per-instance state for you by calling onSaveInstanceState() on each view in the hierarchy that has an id, and by saving the id of the currently focused view (all of which is restored by the default implementation of onRestoreInstanceState(Bundle)). If you override this method to save additional information not captured by each individual view, you will likely want to call through to the default implementation, otherwise be prepared to save all of the state of each view yourself.</p></blockquote><blockquote><p>If called, this method will occur after onStop() for applications targeting platforms starting with P. For applications targeting earlier platform versions this method will occur before onStop() and there are no guarantees about whether it will occur before or after onPause().</p></blockquote><p>介绍有点长，我翻译了一下：</p><blockquote><p>在acitivty被销毁之前，该方法会被调用，用来存储每个实例的状态。这些信息存储在Bundle中，通过onCreate(Bundle)或者onRestoreInstanceState(Bundle)方法恢复实例的的状态。</p></blockquote><blockquote><p>这个方法会在activity可能被销毁之前调用，如果将来activity回到了前台，就可以恢复它的状态。举个例子，如果activity A打开了Activity B，那么就有可能为了回收资源而导致Acitvity A被销毁，鉴于有这种情况出现，那么为了能让用户在将来再次回到Acitivty A时仍然能够看到之前的交互信息，就会调用onSaveInstanceState方法保存activity的状态。通过onCreate(Bundle)或者onRestoreInstanceState(Bundle)方法恢复实例的的状态。</p></blockquote><blockquote><p>不要把这个方法与activity生命周期中的一些方法混淆了，onPause()会在acitivity且后台的时候被调用。什么时候onPause和onStop会调用，但是onSaveInstanseState不会调用呢？举个例子，当从Activity B回到Activity A后，由于B的状态不需要保存了，所以系统就不会调用onSaveInstanseState方法了。什么时候onPause会调用但是onSaveInstanseState不会调用呢？当Activity A上打开了Activity B后，如果A在B的生命周期内不会被销毁，那么A就不会调用onSaveInstanceState方法，A的用户交互信息仍将保持完整性。</p></blockquote><blockquote><p>该方法的默认实现存储了大部分UI的状态，存储了每个view及其对应的id（通过onRestoreInstanceState的默认实现可以将存储的信息恢复出来）。如果你覆盖了这个方法，想在这个方法里额外添加一些信息，那么最好调用下默认实现（super. onSaveInstanseState）,否则你就要自己来手动存储所有view的状态了。<br>从android P开始，这个方法将在onStop()之后被调用。对于版本较低的系统，这个方法将在onStop之前调用，无法保证与onPause的先后调用顺序。</p></blockquote><p>虽然这段内容很长，但是都是满满的干货。大部分也都很好理解，不过我对下面这句话一直存在疑问，</p><blockquote><p>An example when onPause() is called and not onSaveInstanceState(Bundle) is when activity B is launched in front of activity A: the system may avoid calling onSaveInstanceState(Bundle) on activity A if it isn’t killed during the lifetime of B since the state of the user interface of A will stay intact.</p></blockquote><p>Activity A打开了Activity B，真的可以保证Activity A在Activity B的生命周期内绝对不会被杀吗？如何绝对保证呢？如果无法保证，那么就一定会调用onSaveInstanceState吧。</p><p>简单来说，onSaveInstanceState作用就是在activity可能被销毁时被调用来存储activity的状态，然后可以在onCreate或者onRestoreInstanceState中恢复这些信息。</p><p>其实上面的介绍已经比较详细的说明了这个方法的调用时机，即：</p><blockquote><p>从android P开始，这个方法将在onStop()之后被调用。对于版本较低的系统，这个方法将在onStop之前调用，无法保证与onPause的先后调用顺序。</p></blockquote><p>我们现在从源码的角度验证这一观点。我们验证的版本是Android 8.0（API 26）：</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;最近项目中PM加了个需求，要做一个Android应用内通知，即当App在前台收到相应通知消息时，在屏幕顶部展示一个通知（并非系统Notification）。由于种种原因，最后技术选型将应用内通知选择作为一个activity，也就是在当前activity上弹出一个背景透明的a
+      
+    
+    </summary>
+    
+    
+      <category term="onSaveInstanceState" scheme="http://yoursite.com/tags/onSaveInstanceState/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://yoursite.com/2018/03/22/hello-world/"/>
+    <id>http://yoursite.com/2018/03/22/hello-world/</id>
+    <published>2018-03-22T02:51:18.615Z</published>
+    <updated>2018-03-22T06:51:43.158Z</updated>
+    
+    <content type="html"><![CDATA[<p>这里是李松达的小屋，我将在这里分享个人的技术学习体会、生活情感心得。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;这里是李松达的小屋，我将在这里分享个人的技术学习体会、生活情感心得。&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
