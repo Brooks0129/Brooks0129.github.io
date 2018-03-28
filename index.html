@@ -1,1 +1,1338 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 空心</title><meta name="description" content="漆黑空心也想被释放"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/IMG_0477.JPG"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="空心"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/IMG_0477.JPG" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link active">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://weibo.com/u/3840191514" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/brooks0129" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><ul class="home post-list"><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2018/03/27/一些小的Java-Android知识点/" class="post-title-link">一些小的Java&Android知识点</a></h2><div class="post-info">Mar 27, 2018</div><div class="post-content"></div><a href="/2018/03/27/一些小的Java-Android知识点/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2018/03/27/第三人称/" class="post-title-link">第三人称</a></h2><div class="post-info">Mar 27, 2018</div><div class="post-content"></div><a href="/2018/03/27/第三人称/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2018/03/26/推荐几首个人喜欢的歌/" class="post-title-link">推荐几首个人喜欢的歌</a></h2><div class="post-info">Mar 26, 2018</div><div class="post-content"></div><a href="/2018/03/26/推荐几首个人喜欢的歌/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2018/03/22/Android-onSaveInstanceState调用时机/" class="post-title-link">Android onSaveInstanceState调用时机</a></h2><div class="post-info">Mar 22, 2018</div><div class="post-content"></div><a href="/2018/03/22/Android-onSaveInstanceState调用时机/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2018/03/22/hello-world/" class="post-title-link">Hello World</a></h2><div class="post-info">Mar 22, 2018</div><div class="post-content"></div><a href="/2018/03/22/hello-world/" class="read-more">...more</a></article></li></ul></main><footer><div class="paginator"></div><div class="copyright"><p>© 2018 <a href="http://yoursite.com">李松达</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-116316854-1",'auto');ga('send','pageview');</script></body></html>
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="空心" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="漆黑空心也想被释放">
+<meta property="og:type" content="website">
+<meta property="og:title" content="空心">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="空心">
+<meta property="og:description" content="漆黑空心也想被释放">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="空心">
+<meta name="twitter:description" content="漆黑空心也想被释放">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/"/>
+
+
+
+
+
+  <title>空心</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">空心</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">病变</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/28/ss/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李松达">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="空心">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/28/ss/" itemprop="url">ss</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-28T15:10:40+08:00">
+                2018-03-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/27/一些小的Java-Android知识点/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李松达">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="空心">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/27/一些小的Java-Android知识点/" itemprop="url">一些小的Java&Android知识点</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-27T20:06:07+08:00">
+                2018-03-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li><p>==、equals方法和hashcode的区别</p>
+<p>  <code>==</code>：当基本数据类型之间比较时，比较的是他们的值；否则比较的是他们在内存中的地址。</p>
+<p>  <code>equals方法</code>：如果我们不覆盖Object中的equals方法，那么比较的是内存中的地址；</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// Object.java</span><br><span class="line">public boolean equals(Object obj) &#123;  </span><br><span class="line">   	return (this == obj);  </span><br><span class="line">   	&#125;</span><br></pre></td></tr></table></figure>
+<p>  当然我们可以根据具体的需求重写该方法。</p>
+<p> <code>hashCode方法</code>：<br> equals()相等的两个对象他们的hashCode()肯定相等，也就是用equals()对比是绝对可靠的；hashCode()相等的两个对象他们的equals()不一定相等，也就是hashCode()不是绝对可靠的；对于大量需要比较的对象，如果调用equals()那么效率很低，所以先调用hashCode(）方法。如果hashCode()方法得到的值不一样，那么两个对象肯定不相等。如果hashCode()方法得到的值一样，那么再调用equals(）方法。这样会大大提高效率。  </p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/27/第三人称/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李松达">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="空心">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/27/第三人称/" itemprop="url">第三人称</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-27T12:58:31+08:00">
+                2018-03-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>我爱的人最后都成了最恨我的人。</p>
+<p>我无法忍受这种煎熬和痛苦，曾经天真的以为时间会抹平伤口，殊不知每次看到留下的伤疤仍然会如芒在背。所以我只能本能的反抗，我不能让伤痛吞噬掉自我，宁愿用愧疚去替代憎恨。</p>
+<p>所以我做了，我反抗，我伤害了她，字幕画面分割上演碟对碟。爱与恨之间无非就是一个正负号的差别。</p>
+<p>她骂我自私，说我变态，对我失望，但是我没得选择。在经历了不断地折磨之后，或许我还是很喜欢她，但是我们之间的爱情已经变质，我只想保护自己不再痛苦而已。</p>
+<p>也许我只是个第三者，而谁是谁。</p>
+<p>我对朋友说起这件事的时候，我问他，如果是你是我，你会做吗？他说也许不会，但是他的理由无法说服我，因为他毕竟不是我，他无法理解我的伤痛。</p>
+<p>我一直觉得自己是个性情中人，想到什么就会去做。所以在感情中是个敏感且浪漫的人。经历了几段感情，我拥有的只有她们对我的憎恨，多么可悲。</p>
+<p><img src="/images/3.JPG" alt="明信片"></p>
+<p>我真的做了，我一步一步地成为了她最恨的人，她让我从她的生活中消失，说我的痛苦是活该。</p>
+<p>结果是我确实没有那么恨她了，换来的是对她的愧疚和她对我的恨意。以前多么希望能看到她，跟她偶遇的时候我都觉得是上天的安排。可是现在我害怕面对她了。我始终没有对她道歉，没有说出那句对不起。也许我真的是混蛋。</p>
+<p>对不起。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/26/推荐几首个人喜欢的歌/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李松达">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="空心">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/26/推荐几首个人喜欢的歌/" itemprop="url">推荐几首个人喜欢的歌</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-26T19:04:16+08:00">
+                2018-03-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>##空心<br>曾经跟别人说光泽的<a href="http://music.163.com/#/song?id=435288399" target="_blank" rel="noopener">空心</a>是我听过的最悲情的一首歌，其实我觉得在不同的心境下听歌感受是不同的。但是对于这首歌，无论何时听，内心其实都有一种莫名的压抑。想起自己经历的感情爱过的人，最后得到了什么，失去了什么。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">作曲 : 光泽</span><br><span class="line">作词 : 姚若龙</span><br><span class="line">热爱曾是唯一的信仰</span><br><span class="line">相互凝望让对方捆绑</span><br><span class="line">在那时候简单的好傻</span><br><span class="line">却又空前绝后快乐啊</span><br><span class="line">直到现实狠狠推一把</span><br><span class="line">跌到浑身是伤疤</span><br><span class="line">你在欲望面前投降</span><br><span class="line">我在伤痛后面成长</span><br><span class="line">终于知道爱都有翅膀</span><br><span class="line">怎么拥抱它终究要飞翔</span><br><span class="line">漆黑空心也想被释放</span><br><span class="line">奈何思念比恨更顽强</span><br><span class="line">有个怀抱暖得像张床</span><br><span class="line">有份善良微笑多晴朗</span><br><span class="line">有一张唇美丽又疯狂</span><br><span class="line">为何爱谁心都空荡荡</span><br><span class="line">当我听说你跟他散场</span><br><span class="line">狼狈回家带着伤</span><br><span class="line">朋友都说那是惩罚</span><br><span class="line">我的心却多么痛啊</span><br><span class="line">虽然知道爱都有翅膀</span><br><span class="line">因为太爱所以会原谅</span><br><span class="line">漆黑空心也想被释放</span><br><span class="line">奈何思念比恨更顽强</span><br><span class="line">无法割舍就别怕感伤</span><br><span class="line">我也嫌我对你太滚烫</span><br><span class="line">深爱就像一种命一样</span><br><span class="line">没有任何方法能阻挡</span><br><span class="line">就算知道爱都有翅膀</span><br><span class="line">还是愿意让你停靠在我肩膀</span><br><span class="line">你也不用把我当作家</span><br><span class="line">把我当成一棵树吧</span><br></pre></td></tr></table></figure>
+<p>##起风了</p>
+<p><a href="http://music.163.com/#/song?id=461525011" target="_blank" rel="noopener">起风了</a>最近很火的一首歌，由<code>买辣椒也用券</code>翻唱第一次听是在看直播的时候，那个主播唱的很烂，但是歌曲本身真的超好听，尤其是对于一个独自在北京打拼的人来说，会有很多共鸣。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">作曲 : 高橋優</span><br><span class="line">作词 : 米果</span><br><span class="line">原曲: ヤキモチ</span><br><span class="line">后期: 圣雨轻纱</span><br><span class="line">海报：不 咸</span><br><span class="line">这一路上走走停停 顺着少年漂流的痕迹</span><br><span class="line">迈出车站的前一刻 竟有些犹豫</span><br><span class="line">不禁笑这近乡情怯 仍无可避免</span><br><span class="line">而长野的天 依旧这么暖 风吹起了从前</span><br><span class="line">从前初识这世间 万般流连 看着天边似在眼前</span><br><span class="line">也甘愿赴汤蹈火去走它一遍</span><br><span class="line">如今走过这世间 万般流连 翻过岁月不同侧脸</span><br><span class="line">措不及防闯入你的笑颜</span><br><span class="line">我曾难自拔于世界之大 也沉溺于其中梦话 不得真假 不做挣扎 不惧笑话</span><br><span class="line">我曾将青春翻涌成她 也曾指尖弹出盛夏 心之所动 且就随缘去吧</span><br><span class="line">逆着光行走 任风吹雨打</span><br><span class="line">-M-</span><br><span class="line">短短的路走走停停 也有了几分的距离</span><br><span class="line">不知抚摸的是故事 还是段心情</span><br><span class="line">也许期待的不过是 与时间为敌</span><br><span class="line">再次看到你 微凉晨光里 笑的很甜蜜</span><br><span class="line">从前初识这世间 万般流连 看着天边似在眼前</span><br><span class="line">也甘愿赴汤蹈火去走它一遍</span><br><span class="line">如今走过这世间 万般流连 翻过岁月不同侧脸</span><br><span class="line">措不及防闯入你的笑颜</span><br><span class="line">我曾难自拔于世界之大 也沉溺于其中梦话 不得真假 不做挣扎 不惧笑话</span><br><span class="line">我曾将青春翻涌成她 也曾指尖弹出盛夏 心之所动 且就随缘去吧</span><br><span class="line">-=-</span><br><span class="line">晚风吹起你鬓间的白发 抚平回忆留下的疤 你的眼中 明暗交杂 一笑生花</span><br><span class="line">暮色遮住你蹒跚的步伐 走进床头藏起的画 画中的你 低着头说话</span><br><span class="line">我仍感叹于世界之大 也沉醉于儿时情话 不剩真假 不做挣扎 无谓笑话</span><br><span class="line">我终将青春还给了她 连同指尖弹出的盛夏 心之所动 就随风去了</span><br><span class="line">以爱之名 你还愿意吗</span><br><span class="line">-E-</span><br></pre></td></tr></table></figure>
+<hr>
+<p>由<code>起风了</code>了解到<code>买辣椒也用券</code>，接下来两首歌也都是她翻唱的。</p>
+<p>##第三人称（Cover Hush！）</p>
+<p><a href="http://music.163.com/#/song?id=502043537" target="_blank" rel="noopener">第三人称</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">作曲 : Hush</span><br><span class="line">作词 : Hush</span><br><span class="line">他想知道那是谁</span><br><span class="line">为何总沉默寡言</span><br><span class="line">人群中也算抢眼</span><br><span class="line">抢眼的孤独难免</span><br><span class="line"></span><br><span class="line">快乐当然有一点</span><br><span class="line">不过寂寞更强烈</span><br><span class="line">难过时候不流泪</span><br><span class="line">流泪也不算伤悲</span><br><span class="line"></span><br><span class="line">天真以为是他的独特品味</span><br><span class="line">殊不知是他</span><br><span class="line">难以言喻的对决</span><br><span class="line">字幕画面分割上演谍对谍</span><br><span class="line">而谁是谁</span><br><span class="line"></span><br><span class="line">对於第三人称的角度而言</span><br><span class="line">也明白其实</span><br><span class="line">每个人都有缺陷</span><br><span class="line"></span><br><span class="line">不自觉遮掩 多少也算</span><br><span class="line">自然的行为</span><br><span class="line"></span><br><span class="line">快乐当然有一点</span><br><span class="line">不过寂寞更强烈</span><br><span class="line">难过时候不流泪</span><br><span class="line">流泪也不算伤悲</span><br><span class="line"></span><br><span class="line">天真以为是他的独特品味</span><br><span class="line">殊不知是他</span><br><span class="line">难以言喻的对决</span><br><span class="line">字幕画面分割上演谍对谍</span><br><span class="line">而谁是谁</span><br><span class="line"></span><br><span class="line">对於第三人称的角度而言</span><br><span class="line">也明白其实</span><br><span class="line">每个人都有缺陷</span><br><span class="line">才不断的追寻 更好的自己</span><br><span class="line">直到青春一定程度的浪费</span><br><span class="line">才觉得可贵</span><br><span class="line"></span><br><span class="line">他想知道那是谁</span><br></pre></td></tr></table></figure>
+<p>##联觉症</p>
+<p><a href="http://music.163.com/#/song?id=427609608" target="_blank" rel="noopener">联觉症</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">作曲 : 陈粒 - 虚拟</span><br><span class="line">作词 : 央央</span><br><span class="line">Cover:辣椒</span><br><span class="line">《联觉症》</span><br><span class="line">形容虚无的声音</span><br><span class="line">耳畔温柔过叹息</span><br><span class="line">梦里面的白马有羽翼</span><br><span class="line">冰凉蒸腾的水滴</span><br><span class="line">坚硬无助的内心</span><br><span class="line">梦醒了那白马还未醒</span><br><span class="line">唯一我不能幻化成形的就是爱情</span><br><span class="line">它比想象中还透明还易委屈</span><br><span class="line">穿越悲喜覆在左肩 钻进了心里</span><br><span class="line">唯一我不敢靠近亲密的人就是你</span><br><span class="line">你比想象中还动人多么美丽</span><br><span class="line">随白马转啊转啊转 我该叹息</span><br><span class="line">数字加减的秘密</span><br><span class="line">对错涂抹几场戏</span><br><span class="line">眼前的繁锦难以言明</span><br><span class="line">热情滑落在池底</span><br><span class="line">疏离溯源是恐惧</span><br><span class="line">爱你的荒芜该对谁提</span><br><span class="line">唯一我不能幻化成形的就是爱情</span><br><span class="line">它比想象中还透明还易委屈</span><br><span class="line">穿越悲喜覆在左肩 钻进了心里</span><br><span class="line">唯一我不敢靠近亲密的人就是你</span><br><span class="line">你比想象中还动人多么美丽</span><br><span class="line">随白马转啊转啊转 我该叹息</span><br><span class="line">唯一我不能幻化成形的就是爱情</span><br><span class="line">它比想象中还透明还易委屈</span><br><span class="line">穿越悲喜覆在左肩 钻进你心里</span><br><span class="line">我日夜都想靠近亲密的人就是你</span><br><span class="line">你轻描淡写的动人 多么美丽</span><br><span class="line">随白马转啊转啊转 我该叹息</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/22/Android-onSaveInstanceState调用时机/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李松达">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="空心">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/22/Android-onSaveInstanceState调用时机/" itemprop="url">Android onSaveInstanceState调用时机</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-22T14:50:54+08:00">
+                2018-03-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近项目中PM加了个需求，要做一个Android应用内通知，即当App在前台收到相应通知消息时，在屏幕顶部展示一个通知（并非系统Notification）。由于种种原因，最后技术选型将应用内通知选择作为一个activity，也就是在当前activity上弹出一个背景透明的activity。然后我发现下层的activity在onPause之后调用了onSaveInstanceState方法，why？难道onSaveInstanceState不是在activity异常销毁的时候才会调用吗？我们用onSaveInstanceState来保存activity状态，但是onSaveInstanceState真正的调用时机是什么？本文将对onSaveInstanceState方法的调用时机一探究竟。</p>
+<p>##onSaveInstanceState介绍<br>首先看一下[onSaveInstanceState][a]<br>[a]:<a href="https://developer.android.com/reference/android/app/Activity.html#onSaveInstanceState(android.os.Bundle)" target="_blank" rel="noopener">https://developer.android.com/reference/android/app/Activity.html#onSaveInstanceState(android.os.Bundle)</a><br>官方API介绍。</p>
+<blockquote>
+<p>Called to retrieve per-instance state from an activity before being killed so that the state can be restored in onCreate(Bundle) or onRestoreInstanceState(Bundle) (the Bundle populated by this method will be passed to both).</p>
+</blockquote>
+<blockquote>
+<p>This method is called before an activity may be killed so that when it comes back some time in the future it can restore its state. For example, if activity B is launched in front of activity A, and at some point activity A is killed to reclaim resources, activity A will have a chance to save the current state of its user interface via this method so that when the user returns to activity A, the state of the user interface can be restored via onCreate(Bundle) or onRestoreInstanceState(Bundle).</p>
+</blockquote>
+<blockquote>
+<p>Do not confuse this method with activity lifecycle callbacks such as onPause(), which is always called when an activity is being placed in the background or on its way to destruction, or onStop() which is called before destruction. One example of when onPause() and onStop() is called and not this method is when a user navigates back from activity B to activity A: there is no need to call onSaveInstanceState(Bundle) on B because that particular instance will never be restored, so the system avoids calling it. An example when onPause() is called and not onSaveInstanceState(Bundle) is when activity B is launched in front of activity A: the system may avoid calling onSaveInstanceState(Bundle) on activity A if it isn’t killed during the lifetime of B since the state of the user interface of A will stay intact.</p>
+</blockquote>
+<blockquote>
+<p>The default implementation takes care of most of the UI per-instance state for you by calling onSaveInstanceState() on each view in the hierarchy that has an id, and by saving the id of the currently focused view (all of which is restored by the default implementation of onRestoreInstanceState(Bundle)). If you override this method to save additional information not captured by each individual view, you will likely want to call through to the default implementation, otherwise be prepared to save all of the state of each view yourself.</p>
+</blockquote>
+<blockquote>
+<p>If called, this method will occur after onStop() for applications targeting platforms starting with P. For applications targeting earlier platform versions this method will occur before onStop() and there are no guarantees about whether it will occur before or after onPause().</p>
+</blockquote>
+<p>介绍有点长，我翻译了一下：</p>
+<blockquote>
+<p>在acitivty被销毁之前，该方法会被调用，用来存储每个实例的状态。这些信息存储在Bundle中，通过onCreate(Bundle)或者onRestoreInstanceState(Bundle)方法恢复实例的的状态。</p>
+</blockquote>
+<blockquote>
+<p>这个方法会在activity可能被销毁之前调用，如果将来activity回到了前台，就可以恢复它的状态。举个例子，如果activity A打开了Activity B，那么就有可能为了回收资源而导致Acitvity A被销毁，鉴于有这种情况出现，那么为了能让用户在将来再次回到Acitivty A时仍然能够看到之前的交互信息，就会调用onSaveInstanceState方法保存activity的状态。通过onCreate(Bundle)或者onRestoreInstanceState(Bundle)方法恢复实例的的状态。</p>
+</blockquote>
+<blockquote>
+<p>不要把这个方法与activity生命周期中的一些方法混淆了，onPause()会在acitivity且后台的时候被调用。什么时候onPause和onStop会调用，但是onSaveInstanseState不会调用呢？举个例子，当从Activity B回到Activity A后，由于B的状态不需要保存了，所以系统就不会调用onSaveInstanseState方法了。什么时候onPause会调用但是onSaveInstanseState不会调用呢？当Activity A上打开了Activity B后，如果A在B的生命周期内不会被销毁，那么A就不会调用onSaveInstanceState方法，A的用户交互信息仍将保持完整性。</p>
+</blockquote>
+<blockquote>
+<p>该方法的默认实现存储了大部分UI的状态，存储了每个view及其对应的id（通过onRestoreInstanceState的默认实现可以将存储的信息恢复出来）。如果你覆盖了这个方法，想在这个方法里额外添加一些信息，那么最好调用下默认实现（super. onSaveInstanseState）,否则你就要自己来手动存储所有view的状态了。<br>从android P开始，这个方法将在onStop()之后被调用。对于版本较低的系统，这个方法将在onStop之前调用，无法保证与onPause的先后调用顺序。</p>
+</blockquote>
+<p>虽然这段内容很长，但是都是满满的干货。大部分也都很好理解，不过我对下面这句话一直存在疑问，</p>
+<blockquote>
+<p>An example when onPause() is called and not onSaveInstanceState(Bundle) is when activity B is launched in front of activity A: the system may avoid calling onSaveInstanceState(Bundle) on activity A if it isn’t killed during the lifetime of B since the state of the user interface of A will stay intact.</p>
+</blockquote>
+<p>Activity A打开了Activity B，真的可以保证Activity A在Activity B的生命周期内绝对不会被杀吗？如何绝对保证呢？如果无法保证，那么就一定会调用onSaveInstanceState吧。</p>
+<p>简单来说，onSaveInstanceState作用就是在activity可能被销毁时被调用来存储activity的状态，然后可以在onCreate或者onRestoreInstanceState中恢复这些信息。</p>
+<p>其实上面的介绍已经比较详细的说明了这个方法的调用时机，即：</p>
+<blockquote>
+<p>从android P开始，这个方法将在onStop()之后被调用。对于版本较低的系统，这个方法将在onStop之前调用，无法保证与onPause的先后调用顺序。</p>
+</blockquote>
+<p>我们现在从源码的角度验证这一观点。我们验证的版本是Android 8.0（API 26）：</p>
+<p>首先我们看下Activity.java中的onSaveInstanceState方法定义：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// Activity.java</span><br><span class="line">protected void onSaveInstanceState(Bundle outState) &#123;</span><br><span class="line">    outState.putBundle(WINDOW_HIERARCHY_TAG, mWindow.saveHierarchyState());</span><br><span class="line"></span><br><span class="line">    outState.putInt(LAST_AUTOFILL_ID, mLastAutofillId);</span><br><span class="line">    Parcelable p = mFragments.saveAllState();</span><br><span class="line">    if (p != null) &#123;</span><br><span class="line">        outState.putParcelable(FRAGMENTS_TAG, p);</span><br><span class="line">    &#125;</span><br><span class="line">    if (mAutoFillResetNeeded) &#123;</span><br><span class="line">        outState.putBoolean(AUTOFILL_RESET_NEEDED, true);</span><br><span class="line">        getAutofillManager().onSaveInstanceState(outState);</span><br><span class="line">    &#125;</span><br><span class="line">    getApplication().dispatchActivitySaveInstanceState(this, outState);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从这个方法我们大概可以看到onSaveInstanceState这个方法保存了ui的信息和fragment的状态。那么我们看下activity<br>中调用该方法的地方：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// Activity.java</span><br><span class="line">final void performSaveInstanceState(Bundle outState) &#123;</span><br><span class="line">    onSaveInstanceState(outState);</span><br><span class="line">    saveManagedDialogs(outState);</span><br><span class="line">    mActivityTransitionState.saveState(outState);</span><br><span class="line">    storeHasCurrentPermissionRequest(outState);</span><br><span class="line">    if (DEBUG_LIFECYCLE) Slog.v(TAG, &quot;onSaveInstanceState &quot; + this + &quot;: &quot; + outState);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Activity的performSaveInstanceState方法是由Instrumentation的callActivityOnSaveInstanceState方法调用的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// Instrumentation.java</span><br><span class="line">public void callActivityOnSaveInstanceState(Activity activity, Bundle outState) &#123;</span><br><span class="line">    activity.performSaveInstanceState(outState);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Instrumentation的callActivityOnSaveInstanceState方法是由ActivityThread的callCallActivityOnSaveInstanceState方法调用的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// ActivityThread.java</span><br><span class="line">private void callCallActivityOnSaveInstanceState(ActivityClientRecord r) &#123;</span><br><span class="line">    r.state = new Bundle();</span><br><span class="line">    r.state.setAllowFds(false);</span><br><span class="line">    if (r.isPersistable()) &#123;</span><br><span class="line">        r.persistentState = new PersistableBundle();</span><br><span class="line">        mInstrumentation.callActivityOnSaveInstanceState(r.activity, r.state,</span><br><span class="line">                r.persistentState);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        mInstrumentation.callActivityOnSaveInstanceState(r.activity, r.state);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们可以看到有四处调用了callCallActivityOnSaveInstanceState方法：</p>
+<p><img src="/images/1.png" alt="&quot;callCallActivityOnSaveInstanceState调用&quot;"></p>
+<p>下面详细介绍一下这四个方法，这样我们才知道activity在什么时候调用了该方法：</p>
+<ul>
+<li>performPauseActivity</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">final Bundle performPauseActivity(ActivityClientRecord r, boolean finished,</span><br><span class="line">           boolean saveState, String reason) &#123;</span><br><span class="line">       ...</span><br><span class="line">       if (finished) &#123;</span><br><span class="line">           r.activity.mFinished = true;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       // Next have the activity save its current state and managed dialogs...</span><br><span class="line">       if (!r.activity.mFinished &amp;&amp; saveState) &#123;</span><br><span class="line">           callCallActivityOnSaveInstanceState(r);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       performPauseActivityIfNeeded(r, reason);</span><br><span class="line"></span><br><span class="line">       ...</span><br><span class="line"></span><br><span class="line">       return !r.activity.mFinished &amp;&amp; saveState ? r.state : null;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>在performPauseActivity方法中，如果<code>!r.activity.mFinished &amp;&amp; saveState</code>为true，则会执行callCallActivityOnSaveInstanceState方法，然后才会执行performPauseActivityIfNeeded方法，在performPauseActivityIfNeeded方法里，调用了activity<br>的onPause方法。我们通过最开始介绍了解到，onSaveInstanceState方法的执行时机与onPause没有必然联系，但是这段代码却是在onPause之前执行的，是不是有点矛盾？那么我们来看下<code>!r.activity.mFinished &amp;&amp; saveState</code>究竟什么时候为true。首先看一下<code>r.activity.mFinished</code>这个变量，这个变量在activity<br>明确要finish的时候为true，比如我们手动调用了finish()方法；再看一下saveState变量，这里就不贴代码了，我们追溯的这个变量的源头可以发现saveState变量即是<code>activity.getApplicationInfo().targetSdkVersion &lt; android.os.Build.VERSION_CODES.HONEYCOMB</code>的值，即判断targetSdkVersion是否小于11。所以到现在我们就知道了，如果我们的targetSdkVersion小于11，那么onSaveInstanceState方法确实可能在onPause之前调用。但是我们现在几乎所有项目的targetSdkVersion都大于11，所以其实几乎不会在该时候调用onSaveInstance方法。</p>
+<ul>
+<li>performStopActivityInner</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">private void performStopActivityInner(ActivityClientRecord r,</span><br><span class="line">         StopInfo info, boolean keepShown, boolean saveState, String reason) &#123;</span><br><span class="line">     if (localLOGV) Slog.v(TAG, &quot;Performing stop of &quot; + r);</span><br><span class="line">     if (r != null) &#123;</span><br><span class="line">         if (!keepShown &amp;&amp; r.stopped) &#123;</span><br><span class="line">      ...</span><br><span class="line"></span><br><span class="line">         // One must first be paused before stopped...</span><br><span class="line">         performPauseActivityIfNeeded(r, reason);</span><br><span class="line"></span><br><span class="line">      ...</span><br><span class="line"></span><br><span class="line">         // Next have the activity save its current state and managed dialogs...</span><br><span class="line">         if (!r.activity.mFinished &amp;&amp; saveState) &#123;</span><br><span class="line">             if (r.state == null) &#123;</span><br><span class="line">                 callCallActivityOnSaveInstanceState(r);</span><br><span class="line">             &#125;</span><br><span class="line">         &#125;</span><br><span class="line">         if (!keepShown) &#123;</span><br><span class="line">             try &#123;</span><br><span class="line">                 // Now we are idle.</span><br><span class="line">                 r.activity.performStop(false /*preserveWindow*/);</span><br><span class="line">             &#125; catch (Exception e) &#123;</span><br><span class="line">                 if (!mInstrumentation.onException(r.activity, e)) &#123;</span><br><span class="line">                     throw new RuntimeException(</span><br><span class="line">                             &quot;Unable to stop activity &quot;</span><br><span class="line">                             + r.intent.getComponent().toShortString()</span><br><span class="line">                             + &quot;: &quot; + e.toString(), e);</span><br><span class="line">                 &#125;</span><br><span class="line">             &#125;</span><br><span class="line">             r.stopped = true;</span><br><span class="line">             EventLog.writeEvent(LOG_AM_ON_STOP_CALLED, UserHandle.myUserId(),</span><br><span class="line">                     r.activity.getComponentName().getClassName(), reason);</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>我们看到在performStopActivityInner方法里首先执行了performPauseActivityIfNeeded，即再次保证了在onStop之前一定会调用onPause。然后判断是否应该调用callCallActivityOnSaveInstanceState，最后执行<code>r.activity.performStop(false /*preserveWindow*/);</code>，即调用activity<br>的onStop。那么这里的callCallActivityOnSaveInstanceState在什么情况下会执行呢？<code>r.activity.mFinished</code>变量与上面分析的一样，但是saveState有一些不同，我们我们现在来看下在什么情况下为true，</p>
+<p><img src="/images/2.png" alt="&quot;saveState&quot;"></p>
+<p>我们可以看到在第二个方法调用里，saveState为true，而且该方法是由handleStopActivity调用的，即当准备调用activity的onStop方法时，会调用ActivityThread<br>的handleStopActivity方法，此时如果<code>r.activity.mFinished</code>为false，会调用onSaveInstanceState方法。其实我们大部分时候看到的onSaveInstanceState方法调用都是在这个时候发生的。</p>
+<ul>
+<li>handleSleeping</li>
+</ul>
+<p>我们看下这个方法的介绍：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">   // TODO: This method should be changed to use &#123;@link #performStopActivityInner&#125; to perform to</span><br><span class="line">    // stop operation on the activity to reduce code duplication and the chance of fixing a bug in</span><br><span class="line">    // one place and missing the other.</span><br><span class="line">    private void handleSleeping(IBinder token, boolean sleeping) &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其实这个方法里的逻辑跟performStopActivityInner方法里差不多，而且通过这个todo我们也可以看到本身这个方法里的逻辑就应该使用performStopActivityInner来完成。所以对这个方法我们就不做过多解释了。</p>
+<ul>
+<li>handleRelaunchActivity</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">private void handleRelaunchActivity(ActivityClientRecord tmp) &#123;</span><br><span class="line">      ...</span><br><span class="line"></span><br><span class="line">      // Need to ensure state is saved.</span><br><span class="line">      if (!r.paused) &#123;</span><br><span class="line">          performPauseActivity(r.token, false, r.isPreHoneycomb(), &quot;handleRelaunchActivity&quot;);</span><br><span class="line">      &#125;</span><br><span class="line">      if (r.state == null &amp;&amp; !r.stopped &amp;&amp; !r.isPreHoneycomb()) &#123;</span><br><span class="line">          callCallActivityOnSaveInstanceState(r);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      handleDestroyActivity(r.token, false, configChanges, true);</span><br><span class="line"></span><br><span class="line">      ...</span><br><span class="line">      handleLaunchActivity(r, currentIntent, &quot;handleRelaunchActivity&quot;);</span><br><span class="line"></span><br><span class="line">      ...</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>handleRelaunchActivity方法会在activity重新创建时调用，例如我们旋转了屏幕。我们可以看到首先调用了performPauseActivity方法，即activity<br>的onPause，然后调用callCallActivityOnSaveInstanceState犯法，即onSaveInstanceState，然后调用handleDestroyActivity方法完成activity<br>的销毁操作。乍一看是不是有点奇怪？onStop呢？在onSaveInstanceState和onDestory之间不是应该有个onStop吗？其实是在handleDestroyActivity里面，我们简单看下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">   private void handleDestroyActivity(IBinder token, boolean finishing,</span><br><span class="line">            int configChanges, boolean getNonConfigInstance) &#123;</span><br><span class="line">        ActivityClientRecord r = performDestroyActivity(token, finishing,</span><br><span class="line">                configChanges, getNonConfigInstance);</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">private ActivityClientRecord performDestroyActivity(IBinder token, boolean finishing,</span><br><span class="line">            int configChanges, boolean getNonConfigInstance) &#123;</span><br><span class="line">        ActivityClientRecord r = mActivities.get(token);</span><br><span class="line">        Class&lt;? extends Activity&gt; activityClass = null;</span><br><span class="line">        if (localLOGV) Slog.v(TAG, &quot;Performing finish of &quot; + r);</span><br><span class="line">        if (r != null) &#123;</span><br><span class="line">            activityClass = r.activity.getClass();</span><br><span class="line">            r.activity.mConfigChangeFlags |= configChanges;</span><br><span class="line">            if (finishing) &#123;</span><br><span class="line">                r.activity.mFinished = true;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            performPauseActivityIfNeeded(r, &quot;destroy&quot;);</span><br><span class="line"></span><br><span class="line">            if (!r.stopped) &#123;</span><br><span class="line">                try &#123;</span><br><span class="line">                    r.activity.performStop(r.mPreserveWindow);  // ***here</span><br><span class="line">                &#125; catch (SuperNotCalledException e) &#123;</span><br><span class="line">                    throw e;</span><br><span class="line">                &#125; catch (Exception e) &#123;</span><br><span class="line">                    if (!mInstrumentation.onException(r.activity, e)) &#123;</span><br><span class="line">                        throw new RuntimeException(</span><br><span class="line">                                &quot;Unable to stop activity &quot;</span><br><span class="line">                                + safeToComponentShortString(r.intent)</span><br><span class="line">                                + &quot;: &quot; + e.toString(), e);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                r.stopped = true;</span><br><span class="line">                EventLog.writeEvent(LOG_AM_ON_STOP_CALLED, UserHandle.myUserId(),</span><br><span class="line">                        r.activity.getComponentName().getClassName(), &quot;destroy&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">           ...</span><br><span class="line">            try &#123;</span><br><span class="line">                r.activity.mCalled = false;</span><br><span class="line">                mInstrumentation.callActivityOnDestroy(r.activity);</span><br><span class="line">                if (!r.activity.mCalled) &#123;</span><br><span class="line">                    throw new SuperNotCalledException(</span><br><span class="line">                        &quot;Activity &quot; + safeToComponentShortString(r.intent) +</span><br><span class="line">                        &quot; did not call through to super.onDestroy()&quot;);</span><br><span class="line">                &#125;</span><br><span class="line">                if (r.window != null) &#123;</span><br><span class="line">                    r.window.closeAllPanels();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; catch (SuperNotCalledException e) &#123;</span><br><span class="line">                throw e;</span><br><span class="line">            &#125; catch (Exception e) &#123;</span><br><span class="line">                if (!mInstrumentation.onException(r.activity, e)) &#123;</span><br><span class="line">                    throw new RuntimeException(</span><br><span class="line">                            &quot;Unable to destroy activity &quot; + safeToComponentShortString(r.intent)</span><br><span class="line">                            + &quot;: &quot; + e.toString(), e);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        mActivities.remove(token);</span><br><span class="line">        StrictMode.decrementExpectedActivityCount(activityClass);</span><br><span class="line">        return r;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>同样我们也可以看到在performDestroyActivity方法里，会判断activty的pause和stop状态是否执行过，如果没有，则会执行对应生命周期的方法，最后调用<code>mInstrumentation.callActivityOnDestroy(r.activity);</code>，即activity<br>的onDestory方法。<br>到这里我们基本就分析完了，总结起来就是：</p>
+<blockquote>
+<p>在Android P之前：<br>在targetSdkVersion小于11时，如果要执行onSaveInstanceState方法，则会在onPause之前执行。当targetSdkVersion大于等于11时，是在onPause之后执行的，但是都一定会在onStop之前。</p>
+</blockquote>
+<p>当然，按照文档中所说的，在Android P中，这个方法将在onStop()之后被调用。这个的分析以后待补充。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/22/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李松达">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="空心">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/22/hello-world/" itemprop="url">Hello World</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-22T10:51:18+08:00">
+                2018-03-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>这里是李松达的小屋，我将在这里分享个人的技术学习体会、生活情感心得。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">李松达</p>
+              <p class="site-description motion-element" itemprop="description">漆黑空心也想被释放</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李松达</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
