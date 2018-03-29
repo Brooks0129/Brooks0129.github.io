@@ -264,6 +264,194 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://lisongda.com/2018/03/29/Android中TextView部分文字高亮及可点击/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李松达">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/icon.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="空心">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/29/Android中TextView部分文字高亮及可点击/" itemprop="url">Android中TextView部分文字高亮及可点击</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-29T11:11:37+08:00">
+                2018-03-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>首先看下TextView如何实现部分文字高亮？</p>
+<p>实现效果：</p>
+<p><img src="/images/device-2018-03-29-135400.png" alt=""></p>
+<p>这个很简单，利用h5标签就可以。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// string.xml</span><br><span class="line">&lt;string name=&quot;text&quot;&gt;&lt;![CDATA[你同意&lt;font color=&quot;#4AC7BA&quot;&gt;用户协议&lt;/font&gt;吗?]]&gt;&lt;/string&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// MainActivity.java</span></span><br><span class="line"> CharSequence html = Html.fromHtml(getResources().getString(R.string.text));</span><br><span class="line">        TextView textView = (TextView) findViewById(R.id.textView);</span><br><span class="line">        textView.setText(html);</span><br></pre></td></tr></table></figure>
+<p> 为什么要使用CDATA？使用&lt;![CDATA[]]&gt;来包含不被xml解析器解析的内容。当然也可以不使用，那么string.xml中字符串应该为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> // string.xml</span><br><span class="line"> &lt;string name=&quot;text&quot;&gt;你同意&amp;lt;font color=&quot;#4AC7BA&quot;&gt;用户协议&amp;lt;/font&gt;吗?&lt;/string&gt;</span><br><span class="line"> </span><br><span class="line"> // &amp;lt;对应 &lt;</span><br><span class="line"> // &amp;gt;对应 &gt;</span><br><span class="line"></span><br><span class="line">``` </span><br><span class="line">当然,&gt;也可以用相应的转义符表示。但是如果既不使用转义符，也不使用CDATA，只按照如下格式，是无法产生高亮效果的。</span><br></pre></td></tr></table></figure>
+<p>// string.xml</p>
+<string name="text">你同意<font color="#4AC7BA">用户协议</font>吗?</string>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">这种方式应该是最简单的一种实现部分文案高亮的方法。</span><br><span class="line"></span><br><span class="line">但是现在如果要加个需求，高亮部分可以点击，非高亮部分不能点击呢？</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">**就要使用到SpannableString来实现了。**</span><br><span class="line">代码如下：</span><br></pre></td></tr></table></figure>
+<p> // string.xml<br>    <string name="text">你同意用户协议吗?</string><br>    <string name="text_sub">用户协议</string></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```java</span><br><span class="line">// MainActivity.java</span><br><span class="line"></span><br><span class="line">public class MainActivity extends AppCompatActivity &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        TextView textView = (TextView) findViewById(R.id.textView);</span><br><span class="line">        setSpanTextInfo(textView, clickableSpan, getResources().getString(R.string.text), getResources().getString(R.string.text_sub));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ClickableSpan clickableSpan = new ClickableSpan() &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void onClick(View widget) &#123;</span><br><span class="line">            Toast.makeText(MainActivity.this, &quot;click&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    private void setSpanTextInfo(TextView textView, ClickableSpan clickableSpan, String fullTips, String spanTips) &#123;</span><br><span class="line">        SpannableString resultTipStr = new SpannableString(fullTips);</span><br><span class="line">        int start = fullTips.indexOf(spanTips);</span><br><span class="line">        int end = start + spanTips.length();</span><br><span class="line">        int defColor = Color.parseColor(&quot;#4AC7BA&quot;);</span><br><span class="line">        if (start &gt;= 0) &#123;</span><br><span class="line">            // 可点击</span><br><span class="line">            resultTipStr.setSpan(clickableSpan, start, end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);</span><br><span class="line">            // 高亮</span><br><span class="line">            resultTipStr.setSpan(new ForegroundColorSpan(defColor), start, end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);</span><br><span class="line">        &#125;</span><br><span class="line">        textView.setMovementMethod(LinkMovementMethod.getInstance());</span><br><span class="line">        textView.setText(resultTipStr);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>几点需要注意的是：</p>
+<ul>
+<li><p>这里的高亮其实没有必要新创建一个ForegroundColorSpan，覆盖ClickableSpan的updateDrawState方法同样可以做到；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">  public class MainActivity extends AppCompatActivity &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        TextView textView = (TextView) findViewById(R.id.textView);</span><br><span class="line">        setSpanTextInfo(textView, clickableSpan, getResources().getString(R.string.text), getResources().getString(R.string.text_sub));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ClickableSpan clickableSpan = new ClickableSpan() &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void onClick(View widget) &#123;</span><br><span class="line">            Toast.makeText(MainActivity.this, &quot;click&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public void updateDrawState(TextPaint ds) &#123;</span><br><span class="line">            super.updateDrawState(ds);</span><br><span class="line">            // 高亮</span><br><span class="line">            ds.setColor(Color.parseColor(&quot;#4AC7BA&quot;));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    private void setSpanTextInfo(TextView textView, ClickableSpan clickableSpan, String fullTips, String spanTips) &#123;</span><br><span class="line">        SpannableString resultTipStr = new SpannableString(fullTips);</span><br><span class="line">        int start = fullTips.indexOf(spanTips);</span><br><span class="line">        int end = start + spanTips.length();</span><br><span class="line">        if (start &gt;= 0) &#123;</span><br><span class="line">            // 可点击</span><br><span class="line">            resultTipStr.setSpan(clickableSpan, start, end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);</span><br><span class="line">        &#125;</span><br><span class="line">        textView.setMovementMethod(LinkMovementMethod.getInstance());</span><br><span class="line">        textView.setText(resultTipStr);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>其实刚开始的代码不是这样的，</p>
+<p>刚开始的代码是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 高亮</span><br><span class="line">resultTipStr.setSpan(new ForegroundColorSpan(defColor), start, end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);</span><br><span class="line">// 可点击</span><br><span class="line">resultTipStr.setSpan(clickableSpan, start, end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);</span><br></pre></td></tr></table></figure>
+<p>区别在哪里？就是这两行代码顺序反了，但是表现结果就出问题了，这里就不贴图了，表现为高亮部分的颜色变了，不是我们自己设置的颜色。这里查阅了一下官方文档，</p>
+</li>
+</ul>
+<blockquote>
+<p>The text with a ClickableSpan attached will be underlined and the link color will be used as a text color.<br>The default link color is the theme’s accent color or android:textColorLink if this attribute is defined in the theme. </p>
+</blockquote>
+<p> 即ClickableSpan是由默认颜色的，而且它覆盖了我们通过ForegroundColorSpan设置的颜色。</p>
+<p> 我尝试在源码中找一下ClickableSpan是何时设置该颜色的，但是一直没有找到。。。。</p>
+<ul>
+<li><p>当我们在网上查看类似的代码时，其实大部分代码都跟如下相似：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SpannableString string = new SpannableString(&quot;Text with clickable text&quot;);</span><br><span class="line">string.setSpan(new CustomClickableSpan(), 10, 19, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这样的代码有什么问题？java文件里字符串硬编码，应该放在string.xml里。当然这是小问题，因为这只是个例子嘛？但是更严重的问题就是当我们setSpan时起始位置和结束位置该如何确定呢？如果我们要适配多种语言，而不仅仅是中文和英文，该怎么做？比如我参与的项目是针对海外用户的产品，要适配20+的语言，当然是根据不同的文案来选择不同的位置，所以这里就不能把位置写死。</p>
+<p> 就像大家刚开始看到的，我使用了两个字符串的方式来完成这项操作，大致意思是将需要高亮的部分单独提取出来成为一个文案，这样通过字符串匹配的方式来找到起始位置和结束位置。这种方式有没有什么缺点呢？理论上没有。但是在实际开发中却出现了问题。</p>
+<p> 首先，我们要适配20+的语言，这个翻译工作不是由PM来完成的，而是交给第三方翻译公司完成。那么他们在翻译的时候，就经常出现两个字符串无法匹配的情况，即使我们已经明确强调了第二个字符串一定要是第一个字符串的子串，但是结果仍然不如人意，真的不知道他们的工作如何完成的。。。所以每次都需要RD来手动校验。如果出现了不匹配，就会导致高亮和点击效果失效。</p>
+<p> 后来我们这边的RD提出了一个方案，即通过下面的方式就可以保证两个字符串一定会匹配上：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> // string.xml</span><br><span class="line"> &lt;string name=&quot;text&quot;&gt;你同意%s吗?&lt;/string&gt;</span><br><span class="line">&lt;string name=&quot;text_sub&quot;&gt;用户协议&lt;/string&gt;</span><br></pre></td></tr></table></figure>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// MainActivity.java</span></span><br><span class="line">String child = getResources().getString(R.string.text_sub);</span><br><span class="line">String parent = getResources().getString(R.string.text, child);</span><br><span class="line">setSpanTextInfo(textView, clickableSpan, parent, child);</span><br></pre></td></tr></table></figure>
+<p> 不知道大家看懂了没，就是把第一个字符串中需要高亮的部分提取出来，使用%s代替，再在java代码中替换回去，这样就可以保证第二个字符串一定是第一个字符串的子串，这样乍一看是不是很完美？但是它有个致命缺点。</p>
+<p> 就是在做多语翻译的时候，有可能无法get到整个字符串的语意。举个例子，假设现在整个字符串为“你今天跟她打招呼了吗”，“打招呼”需要高亮可点击，那么使用最后的方案就是“你今天跟她%s了吗”，其实这句话的语意是不完整的，在翻译成其他语言的时候，有可能完全不知所云！当然，如果只是中文或英文，倒是没有什么问题。</p>
+<p> 综上，还是采用，两个字符串匹配的方式，如果需要做多个国家的语言适配，那么还是推荐最原始的方案。<br> 即：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// string.xml</span><br><span class="line">  &lt;string name=&quot;text&quot;&gt;你同意用户协议吗?&lt;/string&gt;</span><br><span class="line">  &lt;string name=&quot;text_sub&quot;&gt;用户协议&lt;/string&gt;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://lisongda.com/2018/03/27/一些小的Java-Android知识点/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -814,7 +1002,7 @@
         
           
             <p>最近项目中PM加了个需求，要做一个Android应用内通知，即当App在前台收到相应通知消息时，在屏幕顶部展示一个通知（并非系统Notification）。由于种种原因，最后技术选型将应用内通知选择作为一个activity，也就是在当前activity上弹出一个背景透明的activity。然后我发现下层的activity在onPause之后调用了onSaveInstanceState方法，why？难道onSaveInstanceState不是在activity异常销毁的时候才会调用吗？我们用onSaveInstanceState来保存activity状态，但是onSaveInstanceState真正的调用时机是什么？本文将对onSaveInstanceState方法的调用时机一探究竟。</p>
-<p>##onSaveInstanceState介绍<br>首先看一下<a href="https://developer.android.com/reference/android/app/Activity.html#onSaveInstanceState(android.os.Bundle" target="_blank" rel="noopener">onSaveInstanceState</a>)<br>官方API介绍。</p>
+<p>##onSaveInstanceState介绍<br>首先看一下<a href="https://developer.android.com/reference/android/app/Activity.html#onSaveInstanceState%28android.os.Bundle%29" target="_blank" rel="noopener">onSaveInstanceState</a><br>官方API介绍。</p>
 <blockquote>
 <p>Called to retrieve per-instance state from an activity before being killed so that the state can be restored in onCreate(Bundle) or onRestoreInstanceState(Bundle) (the Bundle populated by this method will be passed to both).</p>
 </blockquote>
@@ -1121,7 +1309,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1143,7 +1331,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
