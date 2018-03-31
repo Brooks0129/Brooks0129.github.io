@@ -366,7 +366,7 @@
 <p> 为什么要使用CDATA？使用&lt;![CDATA[]]&gt;来包含不被xml解析器解析的内容。当然也可以不使用，那么string.xml中字符串应该为：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">string</span> <span class="attr">name</span>=<span class="string">"text"</span>&gt;</span>你同意&amp;lt;font color="#4AC7BA"&gt;用户协议&amp;lt;/font&gt;吗?<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>  大于号和小于号都可以使用对应的转移字符来表示。<code>&amp;lt;对应 &lt;`</code> &gt;对应 &gt;`<br>  当然,&gt;也可以用相应的转义符表示。但是如果既不使用转义符，也不使用CDATA，只按照如下格式，是无法产生高亮效果的。</p>
+<p>  大于号和小于号都可以使用对应的转移字符来表示。<code>&amp;lt;对应 &lt;</code>,<code>&amp;gt;对应 &gt;</code><br>  当然,&gt;也可以用相应的转义符表示。但是如果既不使用转义符，也不使用CDATA，只按照如下格式，是无法产生高亮效果的。</p>
 </blockquote>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">string</span> <span class="attr">name</span>=<span class="string">"text"</span>&gt;</span>你同意<span class="tag">&lt;<span class="name">font</span> <span class="attr">color</span>=<span class="string">"#4AC7BA"</span>&gt;</span>用户协议<span class="tag">&lt;/<span class="name">font</span>&gt;</span>吗?<span class="tag">&lt;/<span class="name">string</span>&gt;</span><span class="comment">&lt;!--无法产生高亮效果--&gt;</span></span><br></pre></td></tr></table></figure>
 <p>这种方式应该是最简单的一种实现部分文案高亮的方法。</p>
