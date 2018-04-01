@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://lisongda.com/2018/03/22/Android-onSaveInstanceState%E8%B0%83%E7%94%A8%E6%97%B6%E6%9C%BA/</loc>
+    
+    <lastmod>2018-04-01T14:09:30.170Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://lisongda.com/2018/03/26/%E6%8E%A8%E8%8D%90%E5%87%A0%E9%A6%96%E4%B8%AA%E4%BA%BA%E5%96%9C%E6%AC%A2%E7%9A%84%E6%AD%8C/</loc>
+    
+    <lastmod>2018-04-01T14:09:09.661Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://lisongda.com/2018/04/01/Android%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%BA%BF%E7%A8%8B%E4%BB%8B%E7%BB%8D%E5%8F%8A%E5%AF%B9%E6%AF%94/</loc>
     
-    <lastmod>2018-04-01T13:58:05.654Z</lastmod>
+    <lastmod>2018-04-01T14:08:32.447Z</lastmod>
     
   </url>
   
@@ -23,13 +37,6 @@
   </url>
   
   <url>
-    <loc>http://lisongda.com/2018/03/22/Android-onSaveInstanceState%E8%B0%83%E7%94%A8%E6%97%B6%E6%9C%BA/</loc>
-    
-    <lastmod>2018-03-29T03:21:05.679Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://lisongda.com/2018/03/27/%E4%B8%80%E4%BA%9B%E5%B0%8F%E7%9A%84Java-Android%E7%9F%A5%E8%AF%86%E7%82%B9/</loc>
     
     <lastmod>2018-03-28T08:31:58.137Z</lastmod>
@@ -40,13 +47,6 @@
     <loc>http://lisongda.com/2018/03/22/hello-world/</loc>
     
     <lastmod>2018-03-28T08:03:25.172Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://lisongda.com/2018/03/26/%E6%8E%A8%E8%8D%90%E5%87%A0%E9%A6%96%E4%B8%AA%E4%BA%BA%E5%96%9C%E6%AC%A2%E7%9A%84%E6%AD%8C/</loc>
-    
-    <lastmod>2018-03-28T08:02:52.658Z</lastmod>
     
   </url>
   
