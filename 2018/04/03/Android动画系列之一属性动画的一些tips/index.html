@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Android,技术,属性动画," />
+  <meta name="keywords" content="Android,技术,Android动画,属性动画," />
 
 
 
@@ -80,18 +80,18 @@
 
 
 <meta name="description" content="本文学习总结于https://developer.android.com/guide/topics/graphics/prop-animation.html ValueAnimator与ObjectAnimator的区别ValueAnimator是属性动画的主要驱动引擎，它会计算需要改变的属性值。属性值的改变一共需要两步完成：1是改变属性值，2是将计算出的值设置到对象上。ValueAnimator">
-<meta name="keywords" content="Android,技术,属性动画">
+<meta name="keywords" content="Android,技术,Android动画,属性动画">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android 属性动画的tips">
-<meta property="og:url" content="http://lisongda.com/2018/04/03/Android-属性动画的tips/index.html">
+<meta property="og:title" content="Android动画系列之一属性动画的一些tips">
+<meta property="og:url" content="http://lisongda.com/2018/04/03/Android动画系列之一属性动画的一些tips/index.html">
 <meta property="og:site_name" content="空心">
 <meta property="og:description" content="本文学习总结于https://developer.android.com/guide/topics/graphics/prop-animation.html ValueAnimator与ObjectAnimator的区别ValueAnimator是属性动画的主要驱动引擎，它会计算需要改变的属性值。属性值的改变一共需要两步完成：1是改变属性值，2是将计算出的值设置到对象上。ValueAnimator">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://lisongda.com/images/5.gif">
 <meta property="og:image" content="http://lisongda.com/images/6.gif">
-<meta property="og:updated_time" content="2018-04-03T08:24:34.412Z">
+<meta property="og:updated_time" content="2018-04-03T09:01:46.332Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android 属性动画的tips">
+<meta name="twitter:title" content="Android动画系列之一属性动画的一些tips">
 <meta name="twitter:description" content="本文学习总结于https://developer.android.com/guide/topics/graphics/prop-animation.html ValueAnimator与ObjectAnimator的区别ValueAnimator是属性动画的主要驱动引擎，它会计算需要改变的属性值。属性值的改变一共需要两步完成：1是改变属性值，2是将计算出的值设置到对象上。ValueAnimator">
 <meta name="twitter:image" content="http://lisongda.com/images/5.gif">
 
@@ -123,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://lisongda.com/2018/04/03/Android-属性动画的tips/"/>
+  <link rel="canonical" href="http://lisongda.com/2018/04/03/Android动画系列之一属性动画的一些tips/"/>
 
 
 
 
 
-  <title>Android 属性动画的tips | 空心</title>
+  <title>Android动画系列之一属性动画的一些tips | 空心</title>
   
 
 
@@ -266,7 +266,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://lisongda.com/2018/04/03/Android-属性动画的tips/">
+    <link itemprop="mainEntityOfPage" href="http://lisongda.com/2018/04/03/Android动画系列之一属性动画的一些tips/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="李瓶儿">
@@ -283,7 +283,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Android 属性动画的tips</h1>
+          <h1 class="post-title" itemprop="name headline">Android动画系列之一属性动画的一些tips</h1>
         
 
         <div class="post-meta">
@@ -295,7 +295,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-03T13:06:39+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-03T15:02:50+08:00">
                 2018-04-03
               </time>
             
@@ -335,7 +335,7 @@
 
           
           
-             <span id="/2018/04/03/Android-属性动画的tips/" class="leancloud_visitors" data-flag-title="Android 属性动画的tips">
+             <span id="/2018/04/03/Android动画系列之一属性动画的一些tips/" class="leancloud_visitors" data-flag-title="Android动画系列之一属性动画的一些tips">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -373,7 +373,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ObjectAnimator animation = ObjectAnimator.ofFloat(textView, <span class="string">"translationX"</span>, <span class="number">100f</span>);</span><br><span class="line">animation.setDuration(<span class="number">1000</span>);</span><br><span class="line">animation.start();</span><br></pre></td></tr></table></figure>
 <p>使用ObjectAnimator是有限制的。</p>
 <ul>
-<li><p>要改变的属性值必须要有setter方法，<code>set&lt;PropertyName&gt;()</code>，因为ObjectAnimator在动画过程中会自动更新属性值，它必须通过setter方法来赋值。比如说，如果属性名字是foo，那么就应该有一个setFoo()方法。那么现在问题来了，如果我们访问的类中没有对应的setter方法怎么办？有三个解决办法：、</p>
+<li><p>要改变的属性值必须要有setter方法，<code>set&lt;PropertyName&gt;()</code>，因为ObjectAnimator在动画过程中会自动更新属性值，它必须通过setter方法来赋值。比如说，如果属性名字是foo，那么就应该有一个setFoo()方法。那么现在问题来了，如果我们访问的类中没有对应的setter方法怎么办？有三个解决办法：</p>
 <p>1.如果我们有权限修改改类的话，直接为对应属性加上setter方法。</p>
 <p>2.使用一个包装类，我们可以在包装类里使用setter方法，然后再改变原对象属性的值。</p>
 <p>3.使用ValueAnimator。</p>
@@ -437,6 +437,8 @@
             <a href="/tags/Android/" rel="tag"># Android</a>
           
             <a href="/tags/技术/" rel="tag"># 技术</a>
+          
+            <a href="/tags/Android动画/" rel="tag"># Android动画</a>
           
             <a href="/tags/属性动画/" rel="tag"># 属性动画</a>
           
@@ -571,7 +573,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
