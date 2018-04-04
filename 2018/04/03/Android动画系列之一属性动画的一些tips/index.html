@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Android,技术,Android动画,属性动画," />
+  <meta name="keywords" content="技术,Android,Android动画,属性动画," />
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="本文学习总结于https://developer.android.com/guide/topics/graphics/prop-animation.html ValueAnimator与ObjectAnimator的区别ValueAnimator是属性动画的主要驱动引擎，它会计算需要改变的属性值。属性值的改变一共需要两步完成：1是改变属性值，2是将计算出的值设置到对象上。ValueAnimator">
-<meta name="keywords" content="Android,技术,Android动画,属性动画">
+<meta name="keywords" content="技术,Android,Android动画,属性动画">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android动画系列之一属性动画的一些tips">
 <meta property="og:url" content="http://lisongda.com/2018/04/03/Android动画系列之一属性动画的一些tips/index.html">
@@ -89,7 +89,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://lisongda.com/images/5.gif">
 <meta property="og:image" content="http://lisongda.com/images/6.gif">
-<meta property="og:updated_time" content="2018-04-03T09:01:46.332Z">
+<meta property="og:updated_time" content="2018-04-03T09:04:04.357Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android动画系列之一属性动画的一些tips">
 <meta name="twitter:description" content="本文学习总结于https://developer.android.com/guide/topics/graphics/prop-animation.html ValueAnimator与ObjectAnimator的区别ValueAnimator是属性动画的主要驱动引擎，它会计算需要改变的属性值。属性值的改变一共需要两步完成：1是改变属性值，2是将计算出的值设置到对象上。ValueAnimator">
@@ -383,7 +383,7 @@
 <li><p>setter方法传递的值应该和getter方法获取的值的类型保持一致。</p>
 </li>
 </ul>
-<h2 id="属行动画中的回调"><a href="#属行动画中的回调" class="headerlink" title="属行动画中的回调"></a>属行动画中的回调</h2><ul>
+<h2 id="属性动画中的回调"><a href="#属性动画中的回调" class="headerlink" title="属性动画中的回调"></a>属性动画中的回调</h2><ul>
 <li><p>Animator.AnimatorListener</p>
 <p>  Animator.AnimatorListener中有四个需要去实现的方法。</p>
   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(textView, <span class="string">"translationX"</span>, <span class="number">0f</span>, <span class="number">100f</span>);</span><br><span class="line">objectAnimator.setDuration(<span class="number">100</span>);</span><br><span class="line">objectAnimator.start();</span><br><span class="line">objectAnimator.addListener(<span class="keyword">new</span> Animator.AnimatorListener() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationStart</span><span class="params">(Animator animation)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationEnd</span><span class="params">(Animator animation)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationCancel</span><span class="params">(Animator animation)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationRepeat</span><span class="params">(Animator animation)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
@@ -434,9 +434,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Android/" rel="tag"># Android</a>
-          
             <a href="/tags/技术/" rel="tag"># 技术</a>
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
           
             <a href="/tags/Android动画/" rel="tag"># Android动画</a>
           
@@ -616,7 +616,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ValueAnimator与ObjectAnimator的区别"><span class="nav-number">1.</span> <span class="nav-text">ValueAnimator与ObjectAnimator的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#属行动画中的回调"><span class="nav-number">2.</span> <span class="nav-text">属行动画中的回调</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用StateListAnimator来描绘view不同状态"><span class="nav-number">3.</span> <span class="nav-text">使用StateListAnimator来描绘view不同状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指定关键帧"><span class="nav-number">4.</span> <span class="nav-text">指定关键帧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ViewPropertyAnimator"><span class="nav-number">5.</span> <span class="nav-text">ViewPropertyAnimator</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ValueAnimator与ObjectAnimator的区别"><span class="nav-number">1.</span> <span class="nav-text">ValueAnimator与ObjectAnimator的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#属性动画中的回调"><span class="nav-number">2.</span> <span class="nav-text">属性动画中的回调</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用StateListAnimator来描绘view不同状态"><span class="nav-number">3.</span> <span class="nav-text">使用StateListAnimator来描绘view不同状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指定关键帧"><span class="nav-number">4.</span> <span class="nav-text">指定关键帧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ViewPropertyAnimator"><span class="nav-number">5.</span> <span class="nav-text">ViewPropertyAnimator</span></a></li></ol></div>
             
 
           </div>
