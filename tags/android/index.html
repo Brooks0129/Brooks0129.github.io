@@ -82,7 +82,7 @@
 <meta name="description" content="漆黑空心也想被释放">
 <meta property="og:type" content="website">
 <meta property="og:title" content="空心">
-<meta property="og:url" content="http://lisongda.com/tags/android/index.html">
+<meta property="og:url" content="http://lisongda.com/tags/Android/index.html">
 <meta property="og:site_name" content="空心">
 <meta property="og:description" content="漆黑空心也想被释放">
 <meta property="og:locale" content="en">
@@ -118,13 +118,13 @@
 
 
 
-  <link rel="canonical" href="http://lisongda.com/tags/android/"/>
+  <link rel="canonical" href="http://lisongda.com/tags/Android/"/>
 
 
 
 
 
-  <title>Tag: android | 空心</title>
+  <title>Tag: Android | 空心</title>
   
 
 
@@ -254,7 +254,7 @@
 
     <div id="posts" class="posts-collapse">
       <div class="collection-title">
-        <h1>android<small>Tag</small>
+        <h1>Android<small>Tag</small>
         </h1>
       </div>
 
@@ -266,9 +266,9 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/2018/03/29/Android中TextView部分文字高亮及可点击/" itemprop="url">
+            <a class="post-title-link" href="/2018/04/03/Android动画系列之二使用动画显示或隐藏View/" itemprop="url">
               
-                <span itemprop="name">Android中TextView部分文字高亮及可点击</span>
+                <span itemprop="name">Android动画系列之二使用动画显示或隐藏View</span>
               
             </a>
         
@@ -276,9 +276,37 @@
 
       <div class="post-meta">
         <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-29T11:11:37+08:00"
-              content="2018-03-29" >
-          03-29
+              datetime="2018-04-03T17:05:18+08:00"
+              content="2018-04-03" >
+          04-03
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2018/04/03/Android动画系列之一属性动画的一些tips/" itemprop="url">
+              
+                <span itemprop="name">Android动画系列之一属性动画的一些tips</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2018-04-03T15:02:50+08:00"
+              content="2018-04-03" >
+          04-03
         </time>
       </div>
 
@@ -342,7 +370,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -364,7 +392,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -680,48 +708,6 @@
             newcounter.save(null, {
               success: function(newcounter) {
                 var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
-          }
-        },
-        error: function(error) {
-          console.log('Error:' + error.code + " " + error.message);
-        }
-      });
-    }
-
-    $(function() {
-      var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-      } else if ($('.post-title-link').length > 1) {
-        showTime(Counter);
-      }
-    });
-  </script>
-
-
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
-
-</body>
-</html>
-r $element = $(document.getElementById(url));
                 $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
               },
               error: function(newcounter, error) {
