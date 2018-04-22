@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Activity,Android," />
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="这里是李松达的小屋，我将在这里分享个人的技术学习体会、生活情感心得。">
+<meta name="description" content="从Activity A打开Activity B，A和B的生命周期如何变化？   A–&amp;gt;onPause() B–&amp;gt;onCreate()–&amp;gt;onStart()–&amp;gt;onResume() A–&amp;gt;onStop()   在弹出一个半透明的activity（比如Dialog）时，原Activity会调用onPause(),不会调用onStop();在Android 7.0及以上多">
+<meta name="keywords" content="Activity,Android">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://lisongda.com/2018/03/22/hello-world/index.html">
+<meta property="og:title" content="Android Activity相关">
+<meta property="og:url" content="http://lisongda.com/2018/04/21/Android-Activity相关/index.html">
 <meta property="og:site_name" content="空心">
-<meta property="og:description" content="这里是李松达的小屋，我将在这里分享个人的技术学习体会、生活情感心得。">
+<meta property="og:description" content="从Activity A打开Activity B，A和B的生命周期如何变化？   A–&amp;gt;onPause() B–&amp;gt;onCreate()–&amp;gt;onStart()–&amp;gt;onResume() A–&amp;gt;onStop()   在弹出一个半透明的activity（比如Dialog）时，原Activity会调用onPause(),不会调用onStop();在Android 7.0及以上多">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-03-28T08:03:25.172Z">
+<meta property="og:updated_time" content="2018-04-21T13:38:35.547Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="这里是李松达的小屋，我将在这里分享个人的技术学习体会、生活情感心得。">
+<meta name="twitter:title" content="Android Activity相关">
+<meta name="twitter:description" content="从Activity A打开Activity B，A和B的生命周期如何变化？   A–&amp;gt;onPause() B–&amp;gt;onCreate()–&amp;gt;onStart()–&amp;gt;onResume() A–&amp;gt;onStop()   在弹出一个半透明的activity（比如Dialog）时，原Activity会调用onPause(),不会调用onStop();在Android 7.0及以上多">
 
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://lisongda.com/2018/03/22/hello-world/"/>
+  <link rel="canonical" href="http://lisongda.com/2018/04/21/Android-Activity相关/"/>
 
 
 
 
 
-  <title>Hello World | 空心</title>
+  <title>Android Activity相关 | 空心</title>
   
 
 
@@ -262,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://lisongda.com/2018/03/22/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://lisongda.com/2018/04/21/Android-Activity相关/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="李瓶儿">
@@ -279,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World</h1>
+          <h1 class="post-title" itemprop="name headline">Android Activity相关</h1>
         
 
         <div class="post-meta">
@@ -291,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-22T10:51:18+08:00">
-                2018-03-22
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-21T21:25:44+08:00">
+                2018-04-21
               </time>
             
 
@@ -314,8 +315,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/hello/" itemprop="url" rel="index">
-                    <span itemprop="name">hello</span>
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
                   </a>
                 </span>
 
@@ -331,7 +332,7 @@
 
           
           
-             <span id="/2018/03/22/hello-world/" class="leancloud_visitors" data-flag-title="Hello World">
+             <span id="/2018/04/21/Android-Activity相关/" class="leancloud_visitors" data-flag-title="Android Activity相关">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -362,7 +363,21 @@
       
 
       
-        <p>这里是李松达的小屋，我将在这里分享个人的技术学习体会、生活情感心得。</p>
+        <ul>
+<li>从Activity A打开Activity B，A和B的生命周期如何变化？</li>
+</ul>
+<ol>
+<li>A–&gt;onPause()</li>
+<li>B–&gt;onCreate()–&gt;onStart()–&gt;onResume()</li>
+<li>A–&gt;onStop()</li>
+</ol>
+<ul>
+<li><p>在弹出一个半透明的activity（比如Dialog）时，原Activity会调用onPause(),不会调用onStop();在Android 7.0及以上多窗口模式下，一个App获取焦点后，其他App会调用onPause();</p>
+</li>
+<li><p>可以使用onCreate或者onRestoreInstanceState方法来恢复Activity保存的数据，不同的是使用onCreate时，需要判断<code>savedInstanceState != null</code>，而使用onRestoreInstanceState不需要做上面的判断。</p>
+</li>
+<li></li>
+</ul>
 
       
     </div>
@@ -378,6 +393,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Activity/" rel="tag"># Activity</a>
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+        </div>
+      
 
       
       
@@ -387,14 +410,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/04/14/Android动画系列之三使用Transition进行Layout动画/" rel="next" title="Android动画系列之三使用Transition进行Layout动画">
+                <i class="fa fa-chevron-left"></i> Android动画系列之三使用Transition进行Layout动画
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/22/Android-onSaveInstanceState调用时机/" rel="prev" title="Android onSaveInstanceState调用时机">
-                Android onSaveInstanceState调用时机 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/04/22/mac-Chrome常用快捷键/" rel="prev" title="mac Chrome常用快捷键">
+                mac Chrome常用快捷键 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
