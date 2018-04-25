@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="空心">
 <meta property="og:description" content="从Activity A打开Activity B，A和B的生命周期如何变化？   A–&amp;gt;onPause() B–&amp;gt;onCreate()–&amp;gt;onStart()–&amp;gt;onResume() A–&amp;gt;onStop()   在弹出一个半透明的activity（比如Dialog）时，原Activity会调用onPause(),不会调用onStop();在Android 7.0及以上多">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-04-25T07:14:29.788Z">
+<meta property="og:updated_time" content="2018-04-25T07:52:53.484Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android Activity相关">
 <meta name="twitter:description" content="从Activity A打开Activity B，A和B的生命周期如何变化？   A–&amp;gt;onPause() B–&amp;gt;onCreate()–&amp;gt;onStart()–&amp;gt;onResume() A–&amp;gt;onStop()   在弹出一个半透明的activity（比如Dialog）时，原Activity会调用onPause(),不会调用onStop();在Android 7.0及以上多">
@@ -376,10 +376,11 @@
 </li>
 <li><p>可以使用onCreate或者onRestoreInstanceState方法来恢复Activity保存的数据，不同的是使用onCreate时，需要判断<code>savedInstanceState != null</code>，而使用onRestoreInstanceState不需要做上面的判断。</p>
 </li>
-<li><p>关于进程间传递数据，尽量不使用自定义Parcelable类。如果两个进程之间的Parcelable类的定义不一样，就会出现问题。在使用AlarmManager传递Intent数据时，不要使用自定义Parcelable类，系统会修改intent里的数据，所以无法识别自定义的Parcelable类，导致我们从Intent中取到的数据为空（在Android 6.0及以上）。</p>
-<p> <a href="https://developer.android.com/guide/components/activities/parcelables-and-bundles.html#sdbp" target="_blank" rel="noopener">https://developer.android.com/guide/components/activities/parcelables-and-bundles.html#sdbp</a></p>
-<p> <a href="https://medium.com/@hanru.yeh/alarms-pendingintents-cannot-include-custom-parcelable-class-instances-on-android-n-93a64aeedb33" target="_blank" rel="noopener">https://medium.com/@hanru.yeh/alarms-pendingintents-cannot-include-custom-parcelable-class-instances-on-android-n-93a64aeedb33</a></p>
+<li><p>关于进程间传递数据，尽量不使用自定义Parcelable类。如果两个进程之间的Parcelable类的定义不一样，就会出现问题。在使用AlarmManager传递Intent数据时，不要使用自定义Parcelable类，系统会修改intent里的数据，所以无法识别自定义的Parcelable类，导致我们从Intent中取到的数据为空（在Android 6.0及以上）。<a href="https://developer.android.com/guide/components/activities/parcelables-and-bundles.html#sdbp" target="_blank" rel="noopener">https://developer.android.com/guide/components/activities/parcelables-and-bundles.html#sdbp</a>.  <a href="https://medium.com/@hanru.yeh/alarms-pendingintents-cannot-include-custom-parcelable-class-instances-on-android-n-93a64aeedb33" target="_blank" rel="noopener">https://medium.com/@hanru.yeh/alarms-pendingintents-cannot-include-custom-parcelable-class-instances-on-android-n-93a64aeedb33</a></p>
 </li>
+</ul>
+<ul>
+<li>当进行Preference配置的时候，可以使用PreferenceFragment或者PreferenceActivity。</li>
 </ul>
 
       
