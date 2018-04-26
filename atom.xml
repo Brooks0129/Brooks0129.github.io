@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://lisongda.com/"/>
-  <updated>2018-04-25T07:12:11.440Z</updated>
+  <updated>2018-04-26T16:33:25.870Z</updated>
   <id>http://lisongda.com/</id>
   
   <author>
@@ -15,6 +15,45 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用getSimpleName()作为Fragment的TAG时的潜在风险</title>
+    <link href="http://lisongda.com/2018/04/26/%E4%BD%BF%E7%94%A8getSimpleName-%E4%BD%9C%E4%B8%BAFragment%E7%9A%84TAG%E6%97%B6%E7%9A%84%E6%BD%9C%E5%9C%A8%E9%A3%8E%E9%99%A9/"/>
+    <id>http://lisongda.com/2018/04/26/使用getSimpleName-作为Fragment的TAG时的潜在风险/</id>
+    <published>2018-04-26T12:43:05.000Z</published>
+    <updated>2018-04-26T16:33:25.870Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文翻译自<a href="https://medium.com/@elye.project/the-danger-of-using-class-getsimplename-as-tag-for-fragment-5cdf3a35bfe2" target="_blank" rel="noopener">https://medium.com/@elye.project/the-danger-of-using-class-getsimplename-as-tag-for-fragment-5cdf3a35bfe2</a></p><p> 当我们在Activity中添加一个Fragment时，我们通常会使用TAG作为它的id。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">getFragmentManager().beginTransaction()</span><br><span class="line">        .add(containerResource, fragment, fragmentTAG).commit();</span><br></pre></td></tr></table></figure><p>一般情况下我们都会选择类名作为这里的fragmentTag。为了简化，这里的类名并不包含包名。当然前提是我们知道项目中不同的包下没有重名的类。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public static final String TAG = MyClassFragment.class.getSimpleName();</span><br></pre></td></tr></table></figure><p>当需要使用该fragment时，我们通过findFragmentByTag方法获取：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fragment = getFragmentManager().findFragmentByTag(tag);</span><br></pre></td></tr></table></figure><p>一般情况下这样做是没有什么问题的，即使是在混淆后。</p><p>真的没有问题吗？</p><p>尽管类不同，但是它们还是可能使用<strong>相同的Tag</strong>。</p><p>How this happen？</p><p>假设现在有两个fragment，以及它们在混淆后的类名如下：</p><blockquote><p>com.mypackage1.FragmentA → com.mypackage1.a</p><p>com.mypackage2.FragmentB → com.mypackage2.a</p></blockquote><p>这样也是没有问题的，但是如果使用<code>simple name</code>呢？</p><blockquote><p>com.mypackage1.FragmentA → a</p><p>com.mypackage2.FragmentB → a</p></blockquote><p>！！！</p><p>也许出现这种情况的概率并不是很大，但也是有可能出现的。</p><p>为了不出现这种情况，可以有如下几种解决方案：</p><ul><li>使用<code>full name</code></li><li>使用别名</li><li>使用字符串常量</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;本文翻译自&lt;a href=&quot;https://medium.com/@elye.project/the-danger-of-using-class-getsimplename-as-tag-for-fragment-5cdf3a35bfe2&quot; target=&quot;_blank&quot; 
+      
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="http://lisongda.com/tags/Android/"/>
+    
+      <category term="Fragment" scheme="http://lisongda.com/tags/Fragment/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android Fragment的一些坑总结</title>
+    <link href="http://lisongda.com/2018/04/26/Android-Fragment%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91%E6%80%BB%E7%BB%93/"/>
+    <id>http://lisongda.com/2018/04/26/Android-Fragment的一些坑总结/</id>
+    <published>2018-04-26T06:31:06.000Z</published>
+    <updated>2018-04-26T06:31:06.927Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>Android ConstraintLayout GuideLine适配RTL</title>
@@ -206,9 +245,9 @@
       <category term="技术" scheme="http://lisongda.com/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="Android" scheme="http://lisongda.com/tags/Android/"/>
-    
       <category term="技术" scheme="http://lisongda.com/tags/%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="Android" scheme="http://lisongda.com/tags/Android/"/>
     
       <category term="Android动画" scheme="http://lisongda.com/tags/Android%E5%8A%A8%E7%94%BB/"/>
     
@@ -235,9 +274,9 @@
       <category term="技术" scheme="http://lisongda.com/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="Android" scheme="http://lisongda.com/tags/Android/"/>
-    
       <category term="技术" scheme="http://lisongda.com/tags/%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="Android" scheme="http://lisongda.com/tags/Android/"/>
     
       <category term="Android动画" scheme="http://lisongda.com/tags/Android%E5%8A%A8%E7%94%BB/"/>
     
