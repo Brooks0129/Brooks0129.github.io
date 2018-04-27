@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="漆黑空心也想被释放">
+<meta name="description" content="getActivity()为null 在一些情况下会遇到framgnet的getActivity()方法为null的问题。 比如：fragment中的异步回调方法，假设此时fragment已经onDetach了，那么此时getActivity()获取到的值为null；Activity意外销毁重建后，系统会自动保存并回复framgnet，导致此时fragment重叠，而旧的fragment取到的a">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android Fragment的一些坑总结">
 <meta property="og:url" content="http://lisongda.com/2018/04/26/Android-Fragment的一些坑总结/index.html">
 <meta property="og:site_name" content="空心">
-<meta property="og:description" content="漆黑空心也想被释放">
+<meta property="og:description" content="getActivity()为null 在一些情况下会遇到framgnet的getActivity()方法为null的问题。 比如：fragment中的异步回调方法，假设此时fragment已经onDetach了，那么此时getActivity()获取到的值为null；Activity意外销毁重建后，系统会自动保存并回复framgnet，导致此时fragment重叠，而旧的fragment取到的a">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-04-26T06:31:06.927Z">
+<meta property="og:updated_time" content="2018-04-27T06:51:10.041Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android Fragment的一些坑总结">
-<meta name="twitter:description" content="漆黑空心也想被释放">
+<meta name="twitter:description" content="getActivity()为null 在一些情况下会遇到framgnet的getActivity()方法为null的问题。 比如：fragment中的异步回调方法，假设此时fragment已经onDetach了，那么此时getActivity()获取到的值为null；Activity意外销毁重建后，系统会自动保存并回复framgnet，导致此时fragment重叠，而旧的fragment取到的a">
 
 
 
@@ -340,7 +340,38 @@
       
 
       
-        
+        <ol>
+<li><p>getActivity()为null</p>
+<p>在一些情况下会遇到framgnet的getActivity()方法为null的问题。</p>
+<p>比如：fragment中的异步回调方法，假设此时fragment已经onDetach了，那么此时getActivity()获取到的值为null；Activity意外销毁重建后，系统会自动保存并回复framgnet，导致此时fragment重叠，而旧的fragment取到的activity为null。</p>
+<p>解决方案：</p>
+<ul>
+<li><p>直接判断<code>getActivity()!=null</code>,简单粗暴，如果不影响业务逻辑是可以接受的。</p>
+</li>
+<li><p>onAttach中将上下文进行保存，但是有可能会造成内存泄漏。</p>
+</li>
+</ul>
+</li>
+</ol>
+<ol>
+<li><p>java.lang.IllegalStateException: Can not perform this action after onSaveInstanceState</p>
+<p>出现这种异常信息的常用场景有两个：</p>
+<ul>
+<li><p>在系统调用activity的onSaveInstanceState()方法后加载fragment时会报上述异常。</p>
+<p>解决方案：在业务允许情况下，使用<code>commitAllowingStateLoss</code>代替<code>commit</code>。</p>
+</li>
+<li><p>系统调用了onSaveInstanceState方法后，用户调用了onBackPressed方法。</p>
+<p>解决方案：</p>
+<ul>
+<li>重写activity不的onSaveInstanceState方法，不调用super的onSaveInstanceState方法 。并不推荐，会丢掉其他状态信息。</li>
+<li>重写onBackPressed方法，不调用super.onBackPressed()，直接finish()。其实这种方法也不是很推荐，因为如果此时有fragment，那么点击back会把fragment和activity一起finish掉。</li>
+<li>在onBackPressed方法里，手动更改是否调用了onSaveInstanceState方法的flag。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span> </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onBackPressed</span><span class="params">()</span> </span>&#123; </span><br><span class="line">	onStateNotSaved(); </span><br><span class="line">		<span class="keyword">super</span>.onBackPressed();</span><br><span class="line">	 &#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+
       
     </div>
     

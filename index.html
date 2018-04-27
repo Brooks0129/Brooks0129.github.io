@@ -483,7 +483,10 @@
         
           
           
-          
+getActivity()为null
+在一些情况下会遇到framgnet的getActivity()方法为null的问题。
+比如：fragment中的异步回调方法，假设此时fragment已经onDetach了，那么此时getActivity()获取到的值为null；Activity意外销毁重建后
+          ...
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/04/26/Android-Fragment的一些坑总结/#more" rel="contents">
