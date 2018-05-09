@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://lisongda.com/"/>
-  <updated>2018-04-29T14:19:41.463Z</updated>
+  <updated>2018-05-09T03:51:02.742Z</updated>
   <id>http://lisongda.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>DownLoadManager不展示通知栏</title>
+    <link href="http://lisongda.com/2018/05/09/DownLoadManager%E4%B8%8D%E5%B1%95%E7%A4%BA%E9%80%9A%E7%9F%A5%E6%A0%8F/"/>
+    <id>http://lisongda.com/2018/05/09/DownLoadManager不展示通知栏/</id>
+    <published>2018-05-09T03:32:58.000Z</published>
+    <updated>2018-05-09T03:51:02.742Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近在做一个下载的需求，因为Android原生有一个DownLoadManager，通过简单调研，觉得它很不错，于是就开始做了。。。</p><p>因为我们的下载是不需要显示通知栏的，而DownLoadManager则需要一句话则可以达到要求：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">downRequest.setNotificationVisibility(DownloadManager.Request.VISIBILITY_HIDDEN);</span><br></pre></td></tr></table></figure><p>把整体框架打完后，一测试，crash。。。。</p><blockquote><p>Caused by: java.lang.SecurityException: Invalid value for visibility: 2<br>    at android.os.Parcel.readException(Parcel.java:1592)<br>    at android.database.DatabaseUtils.readExceptionFromParcel(DatabaseUtils.java:190)<br>    at android.database.DatabaseUtils.readExceptionFromParcel(DatabaseUtils.java:142)<br>    at android.content.ContentProviderProxy.insert(ContentProviderNative.java:476)<br>    at android.content.ContentResolver.insert(ContentResolver.java:1207)<br>    at android.app.DownloadManager.enqueue(DownloadManager.java:946)</p></blockquote><p>原因竟然是隐藏通知栏需要权限！！！</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">&lt;!--DownloadManager下载时不显示Notification--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.DOWNLOAD_WITHOUT_NOTIFICATION"</span> /&gt;</span></span><br></pre></td></tr></table></figure><p>由于新增权限会大大影响app的升级率，我们的PM是不允许增加新权限的。。。只能放弃DownloadManager这个方案了。。。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;最近在做一个下载的需求，因为Android原生有一个DownLoadManager，通过简单调研，觉得它很不错，于是就开始做了。。。&lt;/p&gt;
+&lt;p&gt;因为我们的下载是不需要显示通知栏的，而DownLoadManager则需要一句话则可以达到要求：&lt;/p&gt;
+&lt;figure cl
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://lisongda.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Android" scheme="http://lisongda.com/tags/Android/"/>
+    
+  </entry>
   
   <entry>
     <title>使用getSimpleName()作为Fragment的TAG时的潜在风险</title>
