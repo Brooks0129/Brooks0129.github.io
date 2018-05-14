@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Android,Webview," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="最近小游戏很火爆，我们的项目从半年前到现在也陆陆续续上了几款小游戏，我们的小游戏是通过h5方式实现的，之前的版本都是通过Android中WebView的loadUrl方法直接将h5的index.html加载到内存中，但是这样最大的问题就是所有的资源（包括html、js、png等等）都要通过网络加载，一个游戏所有资源将近3M，整个加载时间也比较耗时，有很多用户在这一阶段就流失掉了。所以PM这一期提的">
+<meta name="keywords" content="Android,Webview">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android WebView加载本地h5问题">
+<meta property="og:url" content="http://lisongda.com/2018/05/14/Android-WebView加载本地h5问题/index.html">
+<meta property="og:site_name" content="空心">
+<meta property="og:description" content="最近小游戏很火爆，我们的项目从半年前到现在也陆陆续续上了几款小游戏，我们的小游戏是通过h5方式实现的，之前的版本都是通过Android中WebView的loadUrl方法直接将h5的index.html加载到内存中，但是这样最大的问题就是所有的资源（包括html、js、png等等）都要通过网络加载，一个游戏所有资源将近3M，整个加载时间也比较耗时，有很多用户在这一阶段就流失掉了。所以PM这一期提的">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://lisongda.com/images/19.png">
+<meta property="og:image" content="http://lisongda.com/images/20.png">
+<meta property="og:image" content="http://lisongda.com/images/23.png">
+<meta property="og:image" content="http://lisongda.com/images/22.png">
+<meta property="og:image" content="http://lisongda.com/images/24.png">
+<meta property="og:updated_time" content="2018-05-14T16:29:23.717Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android WebView加载本地h5问题">
+<meta name="twitter:description" content="最近小游戏很火爆，我们的项目从半年前到现在也陆陆续续上了几款小游戏，我们的小游戏是通过h5方式实现的，之前的版本都是通过Android中WebView的loadUrl方法直接将h5的index.html加载到内存中，但是这样最大的问题就是所有的资源（包括html、js、png等等）都要通过网络加载，一个游戏所有资源将近3M，整个加载时间也比较耗时，有很多用户在这一阶段就流失掉了。所以PM这一期提的">
+<meta name="twitter:image" content="http://lisongda.com/images/19.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://lisongda.com/2018/05/14/Android-WebView加载本地h5问题/"/>
+
+
+
+
+
+  <title>Android WebView加载本地h5问题 | 空心</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?667cbd0eda69849eebae81a514f4acfd";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">空心</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://lisongda.com/2018/05/14/Android-WebView加载本地h5问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李瓶儿">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/icon.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="空心">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Android WebView加载本地h5问题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-14T19:35:36+08:00">
+                2018-05-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/05/14/Android-WebView加载本地h5问题/" class="leancloud_visitors" data-flag-title="Android WebView加载本地h5问题">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近小游戏很火爆，我们的项目从半年前到现在也陆陆续续上了几款小游戏，我们的小游戏是通过h5方式实现的，之前的版本都是通过Android中WebView的<code>loadUrl</code>方法直接将h5的<code>index.html</code>加载到内存中，但是这样最大的问题就是所有的资源（包括html、js、png等等）都要通过网络加载，一个游戏所有资源将近3M，整个加载时间也比较耗时，有很多用户在这一阶段就流失掉了。所以PM这一期提的需求就是加快游戏资源的加载（从技术角度来说这也是必须要完成的），实现方式是将游戏资源打包成zip（大约1M），直接下载zip包，然后解压到本地，然后WebView直接加载本地h5即可。</p>
+<p>乍一看方案很完美，所以就屁颠屁颠开始做了。</p>
+<p>过程分三步：</p>
+<blockquote>
+<p>下载zip -&gt; 解压 -&gt; WebView加载本地资源</p>
+</blockquote>
+<p>然而问题出现在第三部，使用WebView加载本地资源时出现了问题：js中提示某些变量为null！如下图：</p>
+<p><img src="/images/19.png" alt=""></p>
+<p>我就是被这个bug折磨了三天，最后使用了一个我开始根本不会想到的方法to fix this bug。</p>
+<hr>
+<p>说先简单介绍下如何使用Chrome调试Android WebView。<br>在WebView中设置<code>WebView.setWebContentsDebuggingEnabled(true);</code>，然后如图在chrome中输入<code>chrome://inspect/</code>，然后chrome就显示了我们的应用以及可以调试的WebView，点击对应的<code>inspect</code>即可。顺便说一下，使用chrome该功能我们还可以查看应用的数据库信息、SharedPrederence信息等。</p>
+<p><img src="/images/20.png" alt=""></p>
+<p>那么出现该bug有没有可能就是由于我们的js代码本身问题呢？我将游戏资源交给服务端同学，让他们部署到沙河环境，抑或是自己的电脑使用tomcat创建本地服务，然后通过直接加载Url的方式都是可以正常运行游戏的，但是将相同的游戏资源push到手机内，通过WebView访问就是不可以的。另外使用本地html方法加载不同的游戏都会出现问题，所以我觉得真的不是游戏代码本身的问题，而是我们的WebView的某些设置出现了问题。</p>
+<p>最开始的时候我是将游戏资源放置到内部存储，即<code>/data/data/包名/....</code>,后来我试着改成sdcard存储，依旧是不行。</p>
+<p>内部存储时:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mWebView.loadUrl(<span class="string">"file:///"</span>+CustomApp.getContext().getFilesDir()+<span class="string">"/game/index.html"</span>);</span><br></pre></td></tr></table></figure>
+<p>外部存储时：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mWebView.loadUrl(<span class="string">"file:///mnt/sdcard/game/index.html"</span>);</span><br></pre></td></tr></table></figure>
+<p>当看到报错信息是<code>Uncaught TypeError: Cannot read property &#39;modules&#39; of null</code>时，第一感觉当然是去google，<a href="https://stackoverflow.com/questions/33079762/android-webview-uncaught-typeerror-cannot-read-property-getitem-of-null" target="_blank" rel="noopener">stackoverflow</a>上真的有相关解答,答案如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">WebSettings settings = webView.getSettings();</span><br><span class="line">settings.setDomStorageEnabled(<span class="keyword">true</span>);</span><br></pre></td></tr></table></figure>
+<p>setDomStorageEnabled这个方法的作用是什么呢？</p>
+<blockquote>
+<p>DOM Storage：存储一些简单的用key/value对即可解决的数据，根据作用范围的不同，有Session<br>Storage和Local Storage两种，分别用于会话级别的存储（页面关闭即消失）和本地化存储（除非主动<br>删除，否则数据永远不会过期）在Android中可以手动开启DOM Storage（setDomStorageEnabled）。</p>
+</blockquote>
+<p>当满怀期待的设置该方法后，结果还是不可以。</p>
+<p>细想一下，为什么出现变量为null呢？猜想是由于没有加载到部分资源。下面来验证一下：</p>
+<p>我们拿到正常情况下的游戏的加载资源：<br>如图：</p>
+<p><img src="/images/23.png" alt=""></p>
+<p>然后再看下一场情况下的游戏资源：</p>
+<p><img src="/images/22.png" alt=""></p>
+<p>异常情况下确实少了很多图片资源，那么是否是由于文件访问的限制导致图片资源无法加载，所以才会导致某些变量为null呢？js中加载资源的代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> res_gaming = &#123;</span><br><span class="line">	background: <span class="string">"res/img/background.png"</span>,</span><br><span class="line">	game_ccb: <span class="string">"res/ccb/GameCCB.ccbi"</span>,</span><br><span class="line">	game_bg: <span class="string">"res/img/game_bg.png"</span>,</span><br><span class="line">	img_1_png: <span class="string">"res/img/img_1.png"</span>,</span><br><span class="line">	img_1_plist: <span class="string">"res/img/img_1.plist"</span>,</span><br><span class="line">	lose: <span class="string">"res/img/lose.png"</span>,</span><br><span class="line">	win: <span class="string">"res/img/win.png"</span>,</span><br><span class="line">	time_fnt: <span class="string">"res/img/time.fnt"</span>,</span><br><span class="line">	time_png: <span class="string">"res/img/time.png"</span>,</span><br><span class="line">	share_plist: <span class="string">"res/img/share.plist"</span>,</span><br><span class="line">	share_png: <span class="string">"res/img/share.png"</span>,</span><br><span class="line">	beginFont_fnt: <span class="string">"res/img/beginFont.fnt"</span>,</span><br><span class="line">	begin_ccbi: <span class="string">"res/ccb/Begin.ccbi"</span>,</span><br><span class="line">	beginFont_png: <span class="string">"res/img/beginFont.png"</span></span><br><span class="line">&#125;,</span><br><span class="line">	res_music = &#123;</span><br><span class="line">		effect_lose: <span class="string">"res/music/effect_lose.mp3"</span>,</span><br><span class="line">		effect_move: <span class="string">"res/music/effect_move.mp3"</span>,</span><br><span class="line">		effect_bomb: <span class="string">"res/music/effect_bomb.mp3"</span>,</span><br><span class="line">		effect_win: <span class="string">"res/music/effect_win.mp3"</span>,</span><br><span class="line">		music_bg: <span class="string">"res/music/music_bg.mp3"</span>,</span><br><span class="line">		UI_mp3: <span class="string">"res/music/UI.mp3"</span></span><br><span class="line">	&#125;,</span><br><span class="line">	res_loading = &#123;</span><br><span class="line">		loading_ccb: <span class="string">"res/ccb/LoadingCCB.ccbi"</span>,</span><br><span class="line">		public_png: <span class="string">"res/img/public.png"</span>,</span><br><span class="line">		public_plist: <span class="string">"res/img/public.plist"</span>,</span><br><span class="line">		background: <span class="string">"res/img/background.png"</span>,</span><br><span class="line">		loading_plist: <span class="string">"res/img/loading.plist"</span>,</span><br><span class="line">		loading_png: <span class="string">"res/img/loading.png"</span>,</span><br><span class="line">		loading_1_png: <span class="string">"res/img/loading_1.png"</span></span><br><span class="line">	&#125;,</span><br></pre></td></tr></table></figure>
+<p>先不管这个思路对不会，大胆的尝试总好过于原地踏步。</p>
+<p>我发现WebView有以下三个方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  // 设置是否允许 WebView 使用 File 协议</span><br><span class="line">mWebView.getSettings().setAllowFileAccess(true);</span><br><span class="line">// 设置是否允许通过 file url 加载的 Js代码读取其他的本地文件</span><br><span class="line">mWebView.getSettings().setAllowFileAccessFromFileURLs(true);</span><br><span class="line">// 设置是否允许通过 file url 加载的 Javascript 可以访问其他的源(包括http、https等源)</span><br><span class="line">mWebView.getSettings().setAllowUniversalAccessFromFileURLs(true);</span><br></pre></td></tr></table></figure>
+<p>看方法名字是正合我意啊，但是。。。结果依旧没用。而且这三个方法好像还可能造成安全漏洞。详见<a href="https://blog.csdn.net/carson_ho/article/details/64904635" target="_blank" rel="noopener">https://blog.csdn.net/carson_ho/article/details/64904635</a>。</p>
+<p>周一上班后，我与同事讨论了下该情况，仔细想想其实也可能是因为程序异常所以导致图片资源没有加载，如果真是这样，那就本末倒置了。</p>
+<hr>
+<p>后来在网上查阅Android WebView加载本地html时，大家给出的方法都是将h5资源放入到Android<br> Studio的assets目录下，然后以assets方式去加载h5。所以我尝试将h5相关资源全部放入到assets目录下，看看这样是否还报错。如图：</p>
+<p> <img src="/images/24.png" alt=""></p>
+<p> WebView加载h5:</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mWebView.loadUrl(&quot;file:///android_asset/10001single/index.html&quot;);</span><br></pre></td></tr></table></figure>
+<p>以这种方式加载游戏是没有问题的。但是。。。</p>
+<p> 首先可以确定的是这样的方式是肯定无法满足我们的需求的，因为assets的资源需要打包进apk的，属于预置资源，然而我们的游戏资源是需要实时从网络中加载的。那么如果我们将游戏资源下载到assets目录下呢？很遗憾，assets目录下的资源只能读取无法写入。</p>
+<p>所以现在来总结一下：相同的一份游戏代码，放到服务端加载没有问题，使用本地tomcat加载没有问题，放入assets目录下加载没有问题，从本地加载就有问题。</p>
+<p>直到现在我也认为是WebView的一些配置不当，导致从本地加载h5资源出现问题。但是试过了可能的一些方法后仍然是不可以。</p>
+<hr>
+<p>直到我看到了这两篇文章：</p>
+<p><a href="http://asialee.iteye.com/blog/2043289" target="_blank" rel="noopener">android关于加载本地html5的问题</a></p>
+<p><a href="http://asialee.iteye.com/blog/2043291" target="_blank" rel="noopener">android关于加载本地html5的问题(解决办法)</a></p>
+<p>文章里的意思就是webkit内核禁止加载本地html5，还有浏览器的安全性设置问题。</p>
+<p>这篇文章是很久以前的了，现在是否有这个问题有待考究，不过里面涉及的一些问题倒是蛮符合我的bug。更重要的是，文章里提到的解决方案，让我眼前一亮：既然从网络中加载h5没有问题，那么为何不让手机本地创建一个server作为服务端呢？</p>
+<p>这里使用nanohttpd创建server：</p>
+<p>代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.os.Environment;</span><br><span class="line"><span class="keyword">import</span> android.util.Log;</span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> fi.iki.elonen.NanoHTTPD;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebServer</span> <span class="keyword">extends</span> <span class="title">NanoHTTPD</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String MIME_JAVASCRIPT = <span class="string">"text/javascript"</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String MIME_CSS = <span class="string">"text/css"</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String MIME_JPEG = <span class="string">"image/jpeg"</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String MIME_PNG = <span class="string">"image/png"</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String MIME_SVG = <span class="string">"image/svg+xml"</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String MIME_JSON = <span class="string">"application/json"</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">WebServer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(<span class="number">8080</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Response <span class="title">serve</span><span class="params">(IHTTPSession session)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        String mime_type = NanoHTTPD.MIME_PLAINTEXT;</span><br><span class="line">        Method method = session.getMethod();</span><br><span class="line">        String uri = session.getUri();</span><br><span class="line">        System.out.println(method + <span class="string">" '"</span> + uri + <span class="string">"' "</span>);</span><br><span class="line">        InputStream descriptor = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (method.toString().equalsIgnoreCase(<span class="string">"GET"</span>)) &#123;</span><br><span class="line">            String path;</span><br><span class="line">            <span class="keyword">if</span> (uri.equals(<span class="string">"/"</span>)) &#123;</span><br><span class="line">                path = <span class="string">"/index.html"</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                path = uri;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="keyword">if</span> (path.endsWith(<span class="string">".js"</span>)) &#123;</span><br><span class="line">                        mime_type = MIME_JAVASCRIPT;</span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (path.endsWith(<span class="string">".css"</span>)) &#123;</span><br><span class="line">                        mime_type = MIME_CSS;</span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (path.endsWith(<span class="string">".html"</span>)) &#123;</span><br><span class="line">                        mime_type = MIME_HTML;</span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (path.endsWith(<span class="string">".jpeg"</span>)) &#123;</span><br><span class="line">                        mime_type = MIME_JPEG;</span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (path.endsWith(<span class="string">".png"</span>)) &#123;</span><br><span class="line">                        mime_type = MIME_PNG;</span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (path.endsWith(<span class="string">".jpg"</span>)) &#123;</span><br><span class="line">                        mime_type = MIME_JPEG;</span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (path.endsWith(<span class="string">".svg"</span>)) &#123;</span><br><span class="line">                        mime_type = MIME_SVG;</span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (path.endsWith(<span class="string">".json"</span>)) &#123;</span><br><span class="line">                        mime_type = MIME_JSON;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            String sub = path.substring(path.indexOf(<span class="string">"lsd"</span>) + <span class="number">4</span>);</span><br><span class="line">            <span class="comment">// LogHelper.d("lsd", "path:" + path);</span></span><br><span class="line">            <span class="comment">// LogHelper.d("lsd", "sub:" + sub);</span></span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                File file = <span class="keyword">new</span> File(Environment.getExternalStorageDirectory() + <span class="string">"/lsd/"</span> + sub);</span><br><span class="line">                descriptor = <span class="keyword">new</span> FileInputStream(file);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException ioe) &#123;</span><br><span class="line">                Log.w(<span class="string">"Httpd"</span>, ioe.toString());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> newFixedLengthResponse(Response.Status.OK, mime_type, descriptor, descriptor.available());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此时WebView加载的url变为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mWebView.loadUrl(&quot;http://127.0.0.1:8080/mnt/sdcard/lsd/index.html&quot;);</span><br></pre></td></tr></table></figure>
+<p>试了一下，success！</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/tags/Webview/" rel="tag"># Webview</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/09/DownLoadManager不展示通知栏/" rel="next" title="DownLoadManager不展示通知栏">
+                <i class="fa fa-chevron-left"></i> DownLoadManager不展示通知栏
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTM1Ni8xMTg5Mg=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/icon.JPG"
+                alt="李瓶儿" />
+            
+              <p class="site-author-name" itemprop="name">李瓶儿</p>
+              <p class="site-description motion-element" itemprop="description">漆黑空心也想被释放</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/3840191514" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-globe"></i>微博</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李瓶儿</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("mHVuOSPC8XjQ8IPdRmmuJivx-gzGzoHsz", "Xq9gxLecL5D7SA0BkY6WpDWf");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
