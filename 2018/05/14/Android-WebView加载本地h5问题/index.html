@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://lisongda.com/images/23.png">
 <meta property="og:image" content="http://lisongda.com/images/22.png">
 <meta property="og:image" content="http://lisongda.com/images/24.png">
-<meta property="og:updated_time" content="2018-05-15T03:19:42.027Z">
+<meta property="og:updated_time" content="2018-05-17T07:40:31.888Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android WebView加载本地h5问题">
 <meta name="twitter:description" content="最近小游戏很火爆，我们的项目从半年前到现在也陆陆续续上了几款小游戏，我们的小游戏是通过h5方式实现的，之前的版本都是通过Android中WebView的loadUrl方法直接将h5的index.html加载到内存中，但是这样最大的问题就是所有的资源（包括html、js、png等等）都要通过网络加载，一个游戏所有资源将近3M，整个加载时间也比较耗时，有很多用户在这一阶段就流失掉了。所以PM这一期提的">
@@ -426,6 +426,8 @@
 <p>此时WebView加载的url变为：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mWebView.loadUrl(<span class="string">"http://127.0.0.1:8080/mnt/sdcard/lsd/index.html"</span>);</span><br></pre></td></tr></table></figure>
 <p>试了一下，success！</p>
+<p>在之后的测试中发现有时会出现加载失败的情况，经调试nanoHttpd多响应了一次“/favicon.ico”，而我们的资源文件中实际上并没有该文件，所以要将这次请求单独处理。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (uri.endsWith(<span class="string">"favicon.ico"</span>)) &#123;</span><br><span class="line">   <span class="keyword">return</span> newFixedLengthResponse(<span class="string">""</span>);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
