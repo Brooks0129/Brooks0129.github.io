@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://lisongda.com/images/23.png">
 <meta property="og:image" content="http://lisongda.com/images/22.png">
 <meta property="og:image" content="http://lisongda.com/images/24.png">
-<meta property="og:updated_time" content="2018-05-17T07:40:31.888Z">
+<meta property="og:updated_time" content="2018-05-23T16:36:16.220Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android WebView加载本地h5问题">
 <meta name="twitter:description" content="最近小游戏很火爆，我们的项目从半年前到现在也陆陆续续上了几款小游戏，我们的小游戏是通过h5方式实现的，之前的版本都是通过Android中WebView的loadUrl方法直接将h5的index.html加载到内存中，但是这样最大的问题就是所有的资源（包括html、js、png等等）都要通过网络加载，一个游戏所有资源将近3M，整个加载时间也比较耗时，有很多用户在这一阶段就流失掉了。所以PM这一期提的">
@@ -428,6 +428,37 @@
 <p>试了一下，success！</p>
 <p>在之后的测试中发现有时会出现加载失败的情况，经调试nanoHttpd多响应了一次“/favicon.ico”，而我们的资源文件中实际上并没有该文件，所以要将这次请求单独处理。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (uri.endsWith(<span class="string">"favicon.ico"</span>)) &#123;</span><br><span class="line">   <span class="keyword">return</span> newFixedLengthResponse(<span class="string">""</span>);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>后期QA同学测试的时候，发现了一个深坑：</p>
+<p>在玩完单人版的游戏后，加载双人版游戏一定会出问题！（游戏分为单人版和双人版，分别对应不同h5资源）</p>
+<p>双人游戏之间不会相互影响，单人游戏之间也不会相互影响，双人游戏不会影响单人游戏，但是单人游戏会影响双人游戏！如果将app进程kill掉，则双人游戏又恢复正常。</p>
+<p>问题具体表现为：</p>
+<p>游戏资源加载不完整。即部分图片或者js没有加载。</p>
+<p>我以为是单人游戏的缓存可能影响到了双人游戏缓存，所以导致双人游戏加载错误。WebView缓存分为RAM缓存和本地缓存，由于将App Kill掉后双人游戏又可以正常进行，所以初步定为为RAM缓存问题。那么尝试在单人游戏结束后将RAM缓存清理即可。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 清理一个应用中所有WebView使用的缓存</span></span><br><span class="line">mWebView.clearCache(<span class="keyword">false</span>);</span><br></pre></td></tr></table></figure>
+<p>参数false表示只清理RAM缓存。结果双人游戏还是无法正常运行。</p>
+<p>后来我又尝试了将WebView的缓存模式设置为LOAD_NO_CACHE。即：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">WebSettings settings = mWebView.getSettings();</span><br><span class="line">settings.setCacheMode(WebSettings.LOAD_NO_CACHE);</span><br></pre></td></tr></table></figure>
+<p> 结果依然无效。</p>
+<p> 此路不通。</p>
+<p> 既然问题表现为部分资源没有下载，那么我就尝试跟到js中具体加载资源的代码部分，通过log观察是否程序运行到了这一步。</p>
+<p> 当我跟到了这个run方法中调用的的setInterval方法时：</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">run: function(a) &#123;</span><br><span class="line">     var b = <span class="keyword">this</span></span><br><span class="line">       , c = function() &#123;</span><br><span class="line">         a &amp;&amp; (b.config[b.CONFIG_KEY.id] = a);</span><br><span class="line">         b._prepareCalled || b.prepare(function() &#123;</span><br><span class="line">             b._prepared = !<span class="number">0</span></span><br><span class="line">         &#125;);</span><br><span class="line">         cc._supportRender &amp;&amp; (b._checkPrepare = setInterval(function() &#123;</span><br><span class="line">             b._prepared &amp;&amp; (cc._setup(b.config[b.CONFIG_KEY.id]),</span><br><span class="line">             b._runMainLoop(),</span><br><span class="line">             b._eventHide = b._eventHide || <span class="keyword">new</span> cc.EventCustom(b.EVENT_HIDE),</span><br><span class="line">             b._eventHide.setUserData(b),</span><br><span class="line">             b._eventShow = b._eventShow || <span class="keyword">new</span> cc.EventCustom(b.EVENT_SHOW),</span><br><span class="line">             b._eventShow.setUserData(b),</span><br><span class="line">             b.onStart(),</span><br><span class="line">             clearInterval(b._checkPrepare))</span><br><span class="line">         &#125;, <span class="number">10</span>))</span><br><span class="line">     &#125;;</span><br><span class="line">     document.body ? c() : cc._addEventListener(window, <span class="string">"load"</span>, function() &#123;</span><br><span class="line">         <span class="keyword">this</span>.removeEventListener(<span class="string">"load"</span>, arguments.callee, !<span class="number">1</span>);</span><br><span class="line">         c()</span><br><span class="line">     &#125;, !<span class="number">1</span>)</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p> 我发线setInterval方法里的定时任务并没有执行，而在这个方法里的<code>b.onStart()</code>是游戏资源的加载。难道是我们的这个setInterval方法有问题吗？可是如果有问题，那么为什么只加载双人游戏的时候这段代码可以正常执行呢？只有加载了单人游戏后，这段代码就不再执行了。</p>
+<p>我将setInterval方法里的执行逻辑单独拿出来，将setInterval这层壳去掉，发现里面的逻辑果然执行了。那么现在就有两个问题：第一，为什么这个setInterval方法不会执行呢？第二，如果我将setInterval方法里的逻辑抽出来立刻执行（不影响其他逻辑），我们的游戏是否就可以正常玩耍了呢？</p>
+<p>对于第一个问题，我们在文章的最后会进行解答。对于第二个问题，答案是不可以，这么做是可以保证这段代码成功执行，但是接着走下去，又会有其他的问题。在此就不贴出问题了。因为我们的js代码有5万多行，我很清楚，这样一个个填坑绝对不是正道。况且有足够的理由支撑我这样做：只加载双人游戏是没问题的！</p>
+<p>看来此路也是行不通。</p>
+<p>现在我们从java层看这个问题，单人游戏和双人游戏有什么区别呢？由于业务要求，我们单人游戏使用的WebView直接放置在Activity中，而双人游戏的WebView则放在Fragment中，那么是否是因为这个原因呢？我将双人游戏使用的Fragment放在的单人游戏的Activity中，然后将单人游戏的Activity使用的原WebView相关代码全部注释掉，惊奇的发现竟然可以了！！！</p>
+<p>那么原因渐渐找到了，是单人游戏中的WebView的某些设置有问题。</p>
+<p>通过将WebView的相关代码一行行注释，终于发现了罪魁祸首：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onStart</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onStart();</span><br><span class="line">    mWebView.onResume();     </span><br><span class="line">    mWebView.resumeTimers();  <span class="comment">//&lt;----------</span></span><br><span class="line">    <span class="keyword">if</span> (mGameSession.lIsStartLoading) &#123;</span><br><span class="line">        mJsIface.loadUrl(GameSession.JsFunc.ON_GAME_START);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onStop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onStop();</span><br><span class="line">    <span class="keyword">if</span> (mGameSession.lIsStartLoading &amp;&amp; !isFinishing()) &#123;</span><br><span class="line">        mJsIface.loadUrl(GameSession.JsFunc.ON_GAME_STOP);</span><br><span class="line">    &#125;</span><br><span class="line">    mWebView.onPause();</span><br><span class="line">    mWebView.pauseTimers();   <span class="comment">//&lt;----------</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>箭头所指的两行，在Activity onStart的时候，会调用<code>mWebView.resumeTimers();</code>;在Activity OnStop的时候，会调用<code>mWebView.pauseTimers();</code>。那么这两个方法的作用是什么呢？</p>
+<blockquote>
+<p>pauseTimers, onPause 停止解析,javascript执行等操作.区别是 onPause 只作用于调用它的WebView,而 pauseTimers 作用于当前应用中所有的WebView。</p>
+<p>resumeTimers, onResume 恢复解析,javascript执行等操作.区别是 onResume 只作用于调用它的WebView,而 resumeTimers 作用于当前应用中所有的WebView。</p>
+</blockquote>
+<p>也就是说在单人游戏结束时，我们将应用中所有的WebView都执行了pauseTimers方法，经检查在双人游戏开始时并没有调用resumeTimers方法。才导致h5资源加载不完整。这也正好解释了上面js中setInterval方法为什么不调用！！！</p>
+<p>问题找打了，在双人游戏开始前调用WebView的resumeTimers方法即可。</p>
 
       
     </div>
@@ -469,6 +500,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/19/编程常用词汇/" rel="prev" title="编程常用词汇">
+                编程常用词汇 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -545,7 +580,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
