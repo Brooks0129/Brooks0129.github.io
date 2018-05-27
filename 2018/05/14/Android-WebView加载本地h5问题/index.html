@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://lisongda.com/images/23.png">
 <meta property="og:image" content="http://lisongda.com/images/22.png">
 <meta property="og:image" content="http://lisongda.com/images/24.png">
-<meta property="og:updated_time" content="2018-05-23T16:36:16.220Z">
+<meta property="og:updated_time" content="2018-05-25T08:32:23.172Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android WebView加载本地h5问题">
 <meta name="twitter:description" content="最近小游戏很火爆，我们的项目从半年前到现在也陆陆续续上了几款小游戏，我们的小游戏是通过h5方式实现的，之前的版本都是通过Android中WebView的loadUrl方法直接将h5的index.html加载到内存中，但是这样最大的问题就是所有的资源（包括html、js、png等等）都要通过网络加载，一个游戏所有资源将近3M，整个加载时间也比较耗时，有很多用户在这一阶段就流失掉了。所以PM这一期提的">
@@ -458,7 +458,7 @@
 <p>resumeTimers, onResume 恢复解析,javascript执行等操作.区别是 onResume 只作用于调用它的WebView,而 resumeTimers 作用于当前应用中所有的WebView。</p>
 </blockquote>
 <p>也就是说在单人游戏结束时，我们将应用中所有的WebView都执行了pauseTimers方法，经检查在双人游戏开始时并没有调用resumeTimers方法。才导致h5资源加载不完整。这也正好解释了上面js中setInterval方法为什么不调用！！！</p>
-<p>问题找打了，在双人游戏开始前调用WebView的resumeTimers方法即可。</p>
+<p>问题找到了，在双人游戏开始前调用WebView的resumeTimers方法即可。</p>
 
       
     </div>
@@ -580,7 +580,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

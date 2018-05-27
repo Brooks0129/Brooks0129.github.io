@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Android,Fragment," />
+  <meta name="keywords" content="Android," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="getActivity()为null  在一些情况下会遇到framgnet的getActivity()方法为null的问题。   比如：fragment中的异步回调方法，假设此时fragment已经onDetach了，那么此时getActivity()获取到的值为null；Activity意外销毁重建后，系统会自动保存并回复framgnet，导致此时fragment重叠，而旧的fragment取到">
-<meta name="keywords" content="Android,Fragment">
+<meta name="description" content="WebView组件远程代码执行漏洞addJavascriptInterface接口Android API level 16以及之前的版本存在远程代码执行安全漏洞，该漏洞源于程序没有正确限制使用WebView.addJavascriptInterface方法，远程攻击者可通过使用Java Reflection API利用该漏洞执行任意Java对象的方法，简单的说就是通过addJavascriptIn">
+<meta name="keywords" content="Android">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android Fragment的一些坑总结">
-<meta property="og:url" content="http://lisongda.com/2018/04/26/Android-Fragment的一些坑总结/index.html">
+<meta property="og:title" content="Android开发常见安全漏洞总结之一WebView相关">
+<meta property="og:url" content="http://lisongda.com/2018/05/25/Android开发常见安全漏洞总结/index.html">
 <meta property="og:site_name" content="Sander Lee">
-<meta property="og:description" content="getActivity()为null  在一些情况下会遇到framgnet的getActivity()方法为null的问题。   比如：fragment中的异步回调方法，假设此时fragment已经onDetach了，那么此时getActivity()获取到的值为null；Activity意外销毁重建后，系统会自动保存并回复framgnet，导致此时fragment重叠，而旧的fragment取到">
+<meta property="og:description" content="WebView组件远程代码执行漏洞addJavascriptInterface接口Android API level 16以及之前的版本存在远程代码执行安全漏洞，该漏洞源于程序没有正确限制使用WebView.addJavascriptInterface方法，远程攻击者可通过使用Java Reflection API利用该漏洞执行任意Java对象的方法，简单的说就是通过addJavascriptIn">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-04-29T14:21:19.519Z">
+<meta property="og:updated_time" content="2018-05-27T14:09:37.199Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android Fragment的一些坑总结">
-<meta name="twitter:description" content="getActivity()为null  在一些情况下会遇到framgnet的getActivity()方法为null的问题。   比如：fragment中的异步回调方法，假设此时fragment已经onDetach了，那么此时getActivity()获取到的值为null；Activity意外销毁重建后，系统会自动保存并回复framgnet，导致此时fragment重叠，而旧的fragment取到">
+<meta name="twitter:title" content="Android开发常见安全漏洞总结之一WebView相关">
+<meta name="twitter:description" content="WebView组件远程代码执行漏洞addJavascriptInterface接口Android API level 16以及之前的版本存在远程代码执行安全漏洞，该漏洞源于程序没有正确限制使用WebView.addJavascriptInterface方法，远程攻击者可通过使用Java Reflection API利用该漏洞执行任意Java对象的方法，简单的说就是通过addJavascriptIn">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://lisongda.com/2018/04/26/Android-Fragment的一些坑总结/"/>
+  <link rel="canonical" href="http://lisongda.com/2018/05/25/Android开发常见安全漏洞总结/"/>
 
 
 
 
 
-  <title>Android Fragment的一些坑总结 | Sander Lee</title>
+  <title>Android开发常见安全漏洞总结之一WebView相关 | Sander Lee</title>
   
 
 
@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://lisongda.com/2018/04/26/Android-Fragment的一些坑总结/">
+    <link itemprop="mainEntityOfPage" href="http://lisongda.com/2018/05/25/Android开发常见安全漏洞总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Sander Lee">
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Android Fragment的一些坑总结</h1>
+          <h1 class="post-title" itemprop="name headline">Android开发常见安全漏洞总结之一WebView相关</h1>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-26T14:31:06+08:00">
-                2018-04-26
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-25T21:41:03+08:00">
+                2018-05-25
               </time>
             
 
@@ -332,7 +332,7 @@
 
           
           
-             <span id="/2018/04/26/Android-Fragment的一些坑总结/" class="leancloud_visitors" data-flag-title="Android Fragment的一些坑总结">
+             <span id="/2018/05/25/Android开发常见安全漏洞总结/" class="leancloud_visitors" data-flag-title="Android开发常见安全漏洞总结之一WebView相关">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -363,30 +363,68 @@
       
 
       
-        <h2 id="getActivity-为null"><a href="#getActivity-为null" class="headerlink" title="getActivity()为null"></a>getActivity()为null</h2><p>  在一些情况下会遇到framgnet的getActivity()方法为null的问题。</p>
-<p>  比如：fragment中的异步回调方法，假设此时fragment已经onDetach了，那么此时getActivity()获取到的值为null；Activity意外销毁重建后，系统会自动保存并回复framgnet，导致此时fragment重叠，而旧的fragment取到的activity为null。</p>
-<p>  解决方案：</p>
+        <h2 id="WebView组件远程代码执行漏洞"><a href="#WebView组件远程代码执行漏洞" class="headerlink" title="WebView组件远程代码执行漏洞"></a>WebView组件远程代码执行漏洞</h2><h3 id="addJavascriptInterface接口"><a href="#addJavascriptInterface接口" class="headerlink" title="addJavascriptInterface接口"></a>addJavascriptInterface接口</h3><p>Android API level 16以及之前的版本存在远程代码执行安全漏洞，该漏洞源于程序没有正确限制使用WebView.addJavascriptInterface方法，远程攻击者可通过使用Java Reflection API利用该漏洞执行任意Java对象的方法，简单的说就是通过addJavascriptInterface给WebView加入一个JavaScript桥接接口，JavaScript通过调用这个接口可以直接操作本地的JAVA接口。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mWebView.getSettings().setJavaScriptEnabled(<span class="keyword">true</span>);  </span><br><span class="line">mWebView.addJavascriptInterface(<span class="keyword">new</span> JSInterface(), <span class="string">"jsInterface"</span>);</span><br></pre></td></tr></table></figure>
+<p>我们向WebView注册一个名叫“jsInterface”的对象，然后在JS中可以访问到jsInterface这个对象，就可以调用这个对象的一些方法，最终可以调用到Java代码中，从而实现了JS与Java代码的交互。</p>
+<p>JS中可以遍历window对象，找到存在“getClass”方法的对象的对象，然后再通过反射的机制，得到Runtime对象，然后调用静态方法来执行一些命令。</p>
+<p>核心代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">execute</span>(<span class="params">cmdArgs</span>)  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> obj <span class="keyword">in</span> <span class="built_in">window</span>) &#123;  </span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"getClass"</span> <span class="keyword">in</span> <span class="built_in">window</span>[obj]) &#123;  </span><br><span class="line">            alert(obj);  </span><br><span class="line">            <span class="keyword">return</span>  <span class="built_in">window</span>[obj].getClass().forName(<span class="string">"java.lang.Runtime"</span>)  </span><br><span class="line">                 .getMethod(<span class="string">"getRuntime"</span>,<span class="literal">null</span>).invoke(<span class="literal">null</span>,<span class="literal">null</span>).exec(cmdArgs);  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><ol>
+<li>Google 在Android 4.2 版本中规定对被调用的函数以 @JavascriptInterface进行注解从而避免漏洞攻击</li>
+<li>Android 4.2版本之前采用拦截<code>prompt()</code>进行漏洞修复。 <a href="https://blog.csdn.net/leehong2005/article/details/11808557/" target="_blank" rel="noopener">详见</a></li>
+</ol>
+<h3 id="searchBoxJavaBridge-接口"><a href="#searchBoxJavaBridge-接口" class="headerlink" title="searchBoxJavaBridge_接口"></a>searchBoxJavaBridge_接口</h3><p>在Android 3.0以下，Android系统会默认通过searchBoxJavaBridge_的Js接口给 WebView 添加一个JS映射对象：searchBoxJavaBridge_对象。</p>
+<h4 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h4><p>删除默认添加的”searchBoxJavaBridge_”。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mWebView.removeJavascriptInterface(<span class="string">"searchBoxJavaBridge_"</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="accessibility-和-accessibilityTraversal"><a href="#accessibility-和-accessibilityTraversal" class="headerlink" title="accessibility 和 accessibilityTraversal"></a>accessibility 和 accessibilityTraversal</h3><p>此漏洞原理与searchBoxJavaBridge_接口远程代码执行相似，均为未移除不安全的默认接口，不过此漏洞需要用户启动系统设置中的第三方辅助服务，利用条件较复杂。</p>
+<h4 id="解决方案-2"><a href="#解决方案-2" class="headerlink" title="解决方案"></a>解决方案</h4><p>与searchBoxJavaBridge_的解决方案类似：可以调用removeJavascriptInterface(“accessibility”) 和removeJavascriptInterface(“accessibilityTraversal”) 方法移除这两个默认接口。</p>
+<h2 id="WebView跨域访问漏洞"><a href="#WebView跨域访问漏洞" class="headerlink" title="WebView跨域访问漏洞"></a>WebView跨域访问漏洞</h2><p>如果一个Activity可以被其他应用调起，例如声明了<code>android:exported=&quot;true&quot;</code>，相关WebView又开启了file域访问，同时未对file 域的路径进行严格限制所致。攻击者通过URL Scheme 的方式，可远程打开并加载恶意HTML文件，远程获取APP中包括用户登录凭证在内的所有本地敏感数据。</p>
+<p>涉及到三个方法：</p>
 <ul>
-<li><p>直接判断<code>getActivity()!=null</code>,简单粗暴，如果不影响业务逻辑是可以接受的。</p>
+<li><p>setAllowFileAccess</p>
+<p>设置是否允许WebView使用File协议,默认设置为true，即允许在File域下执行任意JavaScript代码。</p>
 </li>
-<li><p>onAttach中将上下文进行保存，但是有可能会造成内存泄漏。</p>
+<li><p>setAllowFileAccessFromFileURLs</p>
+<p>设置是否允许通过 file url 加载的 Js代码读取其他的本地文件。</p>
+</li>
+<li><p>setAllowUniversalAccessFromFileURLs</p>
+<p>设置是否允许通过 file url 加载的 Javascript 可以访问其他的源(包括http、https等源)。</p>
 </li>
 </ul>
-<h2 id="java-lang-IllegalStateException-Can-not-perform-this-action-after-onSaveInstanceState"><a href="#java-lang-IllegalStateException-Can-not-perform-this-action-after-onSaveInstanceState" class="headerlink" title="java.lang.IllegalStateException: Can not perform this action after onSaveInstanceState"></a>java.lang.IllegalStateException: Can not perform this action after onSaveInstanceState</h2><p>  出现这种异常信息的常用场景有两个：</p>
-<ul>
-<li><p>在系统调用activity的onSaveInstanceState()方法后加载fragment时会报上述异常。</p>
-<p> 解决方案：在业务允许情况下，使用<code>commitAllowingStateLoss</code>代替<code>commit</code>。</p>
+<h4 id="解决方案-3"><a href="#解决方案-3" class="headerlink" title="解决方案"></a>解决方案</h4><ol>
+<li><p>file域访问为非功能需求时，手动配置setAllowFileAccessFromFileURLs或setAllowUniversalAccessFromFileURLs两个API为false。（Android4.1版本之前这两个API默认是true，需要显式设置为false）</p>
 </li>
-<li><p>系统调用了onSaveInstanceState方法后，用户调用了onBackPressed方法。</p>
-<p> 解决方案：</p>
-<ul>
-<li>重写activity不的onSaveInstanceState方法，不调用super的onSaveInstanceState方法 。并不推荐，会丢掉其他状态信息。</li>
-<li>重写onBackPressed方法，不调用super.onBackPressed()，直接finish()。其实这种方法也不是很推荐，因为如果此时有fragment，那么点击back会把fragment和activity一起finish掉。</li>
-<li><p>在onBackPressed方法里，手动更改是否调用了onSaveInstanceState方法的flag。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span> </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onBackPressed</span><span class="params">()</span> </span>&#123; </span><br><span class="line">	onStateNotSaved(); </span><br><span class="line">		<span class="keyword">super</span>.onBackPressed();</span><br><span class="line">	 &#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
+<li><p>若需要开启file域访问，则设置file路径的白名单，严格控制file域的访问范围，具体如下：</p>
 </li>
-</ul>
+</ol>
+<p>（1）固定不变的HTML文件可以放在assets或res目录下，<code>file:///android_asset</code>和<code>file:///android_res</code> 在不开启API的情况下也可以访问；</p>
+<p>（2）可能会更新的HTML文件放在<code>/data/data/(app)</code> 目录下，避免被第三方替换或修改；</p>
+<p>（3）对file域请求做白名单限制时，需要对“../../”特殊情况进行处理，避免白名单被绕过。</p>
+<ol>
+<li><p>避免App内部的WebView被不信任的第三方调用。排查内置WebView的 Activity是否被导出、必须导出的Activity是否会通过参数传递调起内置的WebView等。</p>
+</li>
+<li><p>建议进一步对APP目录下的敏感数据进行保护。客户端APP应用设备相关信息（如IMEI、IMSI、Android_id等）作为密钥对敏感数据进行加密。使攻击者难以利用相关漏洞获得敏感信息。  </p>
+</li>
+</ol>
+<h2 id="WebView组件忽略SSL证书验证错误漏洞"><a href="#WebView组件忽略SSL证书验证错误漏洞" class="headerlink" title="WebView组件忽略SSL证书验证错误漏洞"></a>WebView组件忽略SSL证书验证错误漏洞</h2><p>Android WebView组件加载网页发生证书认证错误时，会调用WebViewClient类的onReceivedSslError方法，如果该方法实现调用了handler.proceed()来忽略该证书错误，则会受到中间人攻击的威胁，可能导致隐私泄露。</p>
+<p>实现onReceivedSslError的处理，漏洞代码样例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mWebView.setWebViewClient(<span class="keyword">new</span> WebViewClient() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceivedSslError</span><span class="params">(WebView view, SslErrorHandler handler, SslError error)</span> </span>&#123;</span><br><span class="line">                handler.proceed(); <span class="comment">// Ignore SSL certificate errors</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>
+<p>如上代码在onReceivedSslError处理时没有进行cancel，还是使用了proceed()，忽略掉了发生的SSL异常。</p>
+<h3 id="解决方案-4"><a href="#解决方案-4" class="headerlink" title="解决方案"></a>解决方案</h3><ol>
+<li><p>非浏览器类app，有条件的可以申请正式的ca证书，没条件的可以在客户端中添加证书,切勿信任所有证书或者忽略ssl证书认证错误。</p>
+</li>
+<li><p>浏览器 app，严格按照客户端校验服务器证书流程处理</p>
+<p>1) 客户端需要检查证书是否过期</p>
+<p>2) 证书签发的 CA 是否可靠</p>
+<p>3) CA 的公钥能否正确解开服务器证书的 CA 数字签名，对证书的签名值的有效性做验证</p>
+<p>4) 服务器证书上的域名是否和服务器的实际域名相匹配</p>
+</li>
+<li><p>重载了 onReceivedSslError 方法处理时使用 cancel 方法来停止加载 ssl 验证错误的页面，如下代码:</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mWebView.setWebViewClient(<span class="keyword">new</span> WebViewClient() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceivedSslError</span><span class="params">(WebView view, SslErrorHandler handler, SslError error)</span> </span>&#123;</span><br><span class="line">                handler.cancel(); <span class="comment">// Ignore SSL certificate errors</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="WebView密码明文保存漏洞"><a href="#WebView密码明文保存漏洞" class="headerlink" title="WebView密码明文保存漏洞"></a>WebView密码明文保存漏洞</h2><p>在使用WebView的过程中忽略了<code>WebView setSavePassword</code>，当用户选择保存在WebView中输入的用户名和密码，则会被明文保存到应用数据目录的<code>databases/webview.db</code>中。如果手机被root就可以获取明文保存的密码，造成用户的个人敏感数据泄露。</p>
+<p>如果代码中没有显示调用<code>setSavePassword(false)</code> ，默认为true。</p>
+<h3 id="解决方案-5"><a href="#解决方案-5" class="headerlink" title="解决方案"></a>解决方案</h3><p>使用<code>WebView.getSettings().setSavePassword(false)</code>来禁止保存密码。</p>
 
       
     </div>
@@ -406,8 +444,6 @@
           
             <a href="/tags/Android/" rel="tag"># Android</a>
           
-            <a href="/tags/Fragment/" rel="tag"># Fragment</a>
-          
         </div>
       
 
@@ -419,8 +455,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/25/Android-ConstraintLayout-GuideLine适配RTL/" rel="next" title="Android ConstraintLayout GuideLine适配RTL">
-                <i class="fa fa-chevron-left"></i> Android ConstraintLayout GuideLine适配RTL
+              <a href="/2018/05/19/编程常用词汇/" rel="next" title="编程常用词汇">
+                <i class="fa fa-chevron-left"></i> 编程常用词汇
               </a>
             
           </div>
@@ -428,10 +464,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/26/使用getSimpleName-作为Fragment的TAG时的潜在风险/" rel="prev" title="使用getSimpleName()作为Fragment的TAG时的潜在风险">
-                使用getSimpleName()作为Fragment的TAG时的潜在风险 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -582,7 +614,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#getActivity-为null"><span class="nav-number">1.</span> <span class="nav-text">getActivity()为null</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java-lang-IllegalStateException-Can-not-perform-this-action-after-onSaveInstanceState"><span class="nav-number">2.</span> <span class="nav-text">java.lang.IllegalStateException: Can not perform this action after onSaveInstanceState</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#WebView组件远程代码执行漏洞"><span class="nav-number">1.</span> <span class="nav-text">WebView组件远程代码执行漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#addJavascriptInterface接口"><span class="nav-number">1.1.</span> <span class="nav-text">addJavascriptInterface接口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#解决方案"><span class="nav-number">1.1.1.</span> <span class="nav-text">解决方案</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#searchBoxJavaBridge-接口"><span class="nav-number">1.2.</span> <span class="nav-text">searchBoxJavaBridge_接口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#解决方案-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">解决方案</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#accessibility-和-accessibilityTraversal"><span class="nav-number">1.3.</span> <span class="nav-text">accessibility 和 accessibilityTraversal</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#解决方案-2"><span class="nav-number">1.3.1.</span> <span class="nav-text">解决方案</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WebView跨域访问漏洞"><span class="nav-number">2.</span> <span class="nav-text">WebView跨域访问漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#解决方案-3"><span class="nav-number">2.0.1.</span> <span class="nav-text">解决方案</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WebView组件忽略SSL证书验证错误漏洞"><span class="nav-number">3.</span> <span class="nav-text">WebView组件忽略SSL证书验证错误漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方案-4"><span class="nav-number">3.1.</span> <span class="nav-text">解决方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WebView密码明文保存漏洞"><span class="nav-number">4.</span> <span class="nav-text">WebView密码明文保存漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方案-5"><span class="nav-number">4.1.</span> <span class="nav-text">解决方案</span></a></li></ol></li></ol></div>
             
 
           </div>

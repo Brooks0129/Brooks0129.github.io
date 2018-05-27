@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Android,Fragment," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -79,18 +79,16 @@
 
 
 
-<meta name="description" content="getActivity()为null  在一些情况下会遇到framgnet的getActivity()方法为null的问题。   比如：fragment中的异步回调方法，假设此时fragment已经onDetach了，那么此时getActivity()获取到的值为null；Activity意外销毁重建后，系统会自动保存并回复framgnet，导致此时fragment重叠，而旧的fragment取到">
-<meta name="keywords" content="Android,Fragment">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Android Fragment的一些坑总结">
-<meta property="og:url" content="http://lisongda.com/2018/04/26/Android-Fragment的一些坑总结/index.html">
+<meta name="description" content="I&apos;ll raise you like a phoenix">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sander Lee">
+<meta property="og:url" content="http://lisongda.com/page/3/index.html">
 <meta property="og:site_name" content="Sander Lee">
-<meta property="og:description" content="getActivity()为null  在一些情况下会遇到framgnet的getActivity()方法为null的问题。   比如：fragment中的异步回调方法，假设此时fragment已经onDetach了，那么此时getActivity()获取到的值为null；Activity意外销毁重建后，系统会自动保存并回复framgnet，导致此时fragment重叠，而旧的fragment取到">
+<meta property="og:description" content="I&apos;ll raise you like a phoenix">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-04-29T14:21:19.519Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android Fragment的一些坑总结">
-<meta name="twitter:description" content="getActivity()为null  在一些情况下会遇到framgnet的getActivity()方法为null的问题。   比如：fragment中的异步回调方法，假设此时fragment已经onDetach了，那么此时getActivity()获取到的值为null；Activity意外销毁重建后，系统会自动保存并回复framgnet，导致此时fragment重叠，而旧的fragment取到">
+<meta name="twitter:title" content="Sander Lee">
+<meta name="twitter:description" content="I&apos;ll raise you like a phoenix">
 
 
 
@@ -120,13 +118,13 @@
 
 
 
-  <link rel="canonical" href="http://lisongda.com/2018/04/26/Android-Fragment的一些坑总结/"/>
+  <link rel="canonical" href="http://lisongda.com/page/3/"/>
 
 
 
 
 
-  <title>Android Fragment的一些坑总结 | Sander Lee</title>
+  <title>Sander Lee</title>
   
 
 
@@ -155,7 +153,8 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -248,9 +247,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-
-  <div id="posts" class="posts-expand">
+  <section id="posts" class="posts-expand">
     
+      
 
   
 
@@ -263,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://lisongda.com/2018/04/26/Android-Fragment的一些坑总结/">
+    <link itemprop="mainEntityOfPage" href="http://lisongda.com/2018/03/22/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Sander Lee">
@@ -280,7 +279,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Android Fragment的一些坑总结</h1>
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/22/hello-world/" itemprop="url">Hello World</a></h1>
         
 
         <div class="post-meta">
@@ -292,8 +293,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-26T14:31:06+08:00">
-                2018-04-26
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-22T10:51:18+08:00">
+                2018-03-22
               </time>
             
 
@@ -315,8 +316,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
+                  <a href="/categories/hello/" itemprop="url" rel="index">
+                    <span itemprop="name">hello</span>
                   </a>
                 </span>
 
@@ -332,7 +333,7 @@
 
           
           
-             <span id="/2018/04/26/Android-Fragment的一些坑总结/" class="leancloud_visitors" data-flag-title="Android Fragment的一些坑总结">
+             <span id="/2018/03/22/hello-world/" class="leancloud_visitors" data-flag-title="Hello World">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -363,31 +364,19 @@
       
 
       
-        <h2 id="getActivity-为null"><a href="#getActivity-为null" class="headerlink" title="getActivity()为null"></a>getActivity()为null</h2><p>  在一些情况下会遇到framgnet的getActivity()方法为null的问题。</p>
-<p>  比如：fragment中的异步回调方法，假设此时fragment已经onDetach了，那么此时getActivity()获取到的值为null；Activity意外销毁重建后，系统会自动保存并回复framgnet，导致此时fragment重叠，而旧的fragment取到的activity为null。</p>
-<p>  解决方案：</p>
-<ul>
-<li><p>直接判断<code>getActivity()!=null</code>,简单粗暴，如果不影响业务逻辑是可以接受的。</p>
-</li>
-<li><p>onAttach中将上下文进行保存，但是有可能会造成内存泄漏。</p>
-</li>
-</ul>
-<h2 id="java-lang-IllegalStateException-Can-not-perform-this-action-after-onSaveInstanceState"><a href="#java-lang-IllegalStateException-Can-not-perform-this-action-after-onSaveInstanceState" class="headerlink" title="java.lang.IllegalStateException: Can not perform this action after onSaveInstanceState"></a>java.lang.IllegalStateException: Can not perform this action after onSaveInstanceState</h2><p>  出现这种异常信息的常用场景有两个：</p>
-<ul>
-<li><p>在系统调用activity的onSaveInstanceState()方法后加载fragment时会报上述异常。</p>
-<p> 解决方案：在业务允许情况下，使用<code>commitAllowingStateLoss</code>代替<code>commit</code>。</p>
-</li>
-<li><p>系统调用了onSaveInstanceState方法后，用户调用了onBackPressed方法。</p>
-<p> 解决方案：</p>
-<ul>
-<li>重写activity不的onSaveInstanceState方法，不调用super的onSaveInstanceState方法 。并不推荐，会丢掉其他状态信息。</li>
-<li>重写onBackPressed方法，不调用super.onBackPressed()，直接finish()。其实这种方法也不是很推荐，因为如果此时有fragment，那么点击back会把fragment和activity一起finish掉。</li>
-<li><p>在onBackPressed方法里，手动更改是否调用了onSaveInstanceState方法的flag。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span> </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onBackPressed</span><span class="params">()</span> </span>&#123; </span><br><span class="line">	onStateNotSaved(); </span><br><span class="line">		<span class="keyword">super</span>.onBackPressed();</span><br><span class="line">	 &#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
+        
+          
+          这里是李松达的小屋，我将在这里分享个人的技术学习体会、生活情感心得。
 
+          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/22/hello-world/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
       
     </div>
     
@@ -402,42 +391,14 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Android/" rel="tag"># Android</a>
-          
-            <a href="/tags/Fragment/" rel="tag"># Fragment</a>
-          
-        </div>
+
+      
+
       
 
       
       
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/04/25/Android-ConstraintLayout-GuideLine适配RTL/" rel="next" title="Android ConstraintLayout GuideLine适配RTL">
-                <i class="fa fa-chevron-left"></i> Android ConstraintLayout GuideLine适配RTL
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/26/使用getSimpleName-作为Fragment的TAG时的潜在风险/" rel="prev" title="使用getSimpleName()作为Fragment的TAG时的潜在风险">
-                使用getSimpleName()作为Fragment的TAG时的潜在风险 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
+        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -447,11 +408,14 @@
   </article>
 
 
+    
+  </section>
 
-    <div class="post-spread">
-      
-    </div>
-  </div>
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
+
 
 
           </div>
@@ -459,15 +423,6 @@
 
 
           
-
-  
-    <div class="comments" id="comments">
-      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTM1Ni8xMTg5Mg=="></div>
-    </div>
-
-  
-
-
 
         </div>
         
@@ -488,17 +443,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -572,22 +518,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#getActivity-为null"><span class="nav-number">1.</span> <span class="nav-text">getActivity()为null</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java-lang-IllegalStateException-Can-not-perform-this-action-after-onSaveInstanceState"><span class="nav-number">2.</span> <span class="nav-text">java.lang.IllegalStateException: Can not perform this action after onSaveInstanceState</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -741,10 +671,6 @@
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 
@@ -773,17 +699,6 @@
 
 
 
-  
-    <script type="text/javascript">
-      (function(d, s) {
-        var j, e = d.getElementsByTagName(s)[0];
-        if (typeof LivereTower === 'function') { return; }
-        j = d.createElement(s);
-        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-        j.async = true;
-        e.parentNode.insertBefore(j, e);
-      })(document, 'script');
-    </script>
   
 
 
