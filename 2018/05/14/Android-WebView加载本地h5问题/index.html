@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://lisongda.com/images/23.png">
 <meta property="og:image" content="http://lisongda.com/images/22.png">
 <meta property="og:image" content="http://lisongda.com/images/24.png">
-<meta property="og:updated_time" content="2018-05-25T08:32:23.172Z">
+<meta property="og:updated_time" content="2018-05-30T07:17:30.457Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android WebView加载本地h5问题">
 <meta name="twitter:description" content="最近小游戏很火爆，我们的项目从半年前到现在也陆陆续续上了几款小游戏，我们的小游戏是通过h5方式实现的，之前的版本都是通过Android中WebView的loadUrl方法直接将h5的index.html加载到内存中，但是这样最大的问题就是所有的资源（包括html、js、png等等）都要通过网络加载，一个游戏所有资源将近3M，整个加载时间也比较耗时，有很多用户在这一阶段就流失掉了。所以PM这一期提的">
@@ -418,7 +418,7 @@
 <p>直到我看到了这两篇文章：</p>
 <p><a href="http://asialee.iteye.com/blog/2043289" target="_blank" rel="noopener">android关于加载本地html5的问题</a></p>
 <p><a href="http://asialee.iteye.com/blog/2043291" target="_blank" rel="noopener">android关于加载本地html5的问题(解决办法)</a></p>
-<p>文章里的意思就是webkit内核禁止加载本地html5，还有浏览器的安全性设置问题。</p>
+<p>文章里的意思就是webkit内核禁止<code>Ajax</code>加载本地html5，还有浏览器的安全性设置问题。</p>
 <p>这篇文章是很久以前的了，现在是否有这个问题有待考究，不过里面涉及的一些问题倒是蛮符合我的bug。更重要的是，文章里提到的解决方案，让我眼前一亮：既然从网络中加载h5没有问题，那么为何不让手机本地创建一个server作为服务端呢？</p>
 <p>这里使用nanohttpd创建server：</p>
 <p>代码如下：</p>
@@ -459,6 +459,23 @@
 </blockquote>
 <p>也就是说在单人游戏结束时，我们将应用中所有的WebView都执行了pauseTimers方法，经检查在双人游戏开始时并没有调用resumeTimers方法。才导致h5资源加载不完整。这也正好解释了上面js中setInterval方法为什么不调用！！！</p>
 <p>问题找到了，在双人游戏开始前调用WebView的resumeTimers方法即可。</p>
+<hr>
+<p>ok, 为什么直接从本地加载html会出现异常这个问题一直在困扰我，我决定从头梳理一下，经过定位我最终发现了问题所在，如下代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">loadTxt: <span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (cc._isNodeJs) <span class="built_in">require</span>(<span class="string">"fs"</span>).readFile(a, <span class="function"><span class="keyword">function</span>(<span class="params">a, c</span>) </span>&#123;</span><br><span class="line">		a ? b(a) : b(<span class="literal">null</span>, c.toString())</span><br><span class="line">	&#125;);</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">var</span> c = <span class="keyword">this</span>.getXMLHttpRequest(),</span><br><span class="line">			d = <span class="string">"load "</span> + a + <span class="string">" failed!"</span>;</span><br><span class="line">		c.open(<span class="string">"GET"</span>, a, !<span class="number">0</span>);</span><br><span class="line">		/msie/i.test(navigator.userAgent) &amp;&amp; !<span class="regexp">/opera/i</span>.test(navigator.userAgent) ? (c.setRequestHeader(<span class="string">"Accept-Charset"</span>, <span class="string">"utf-8"</span>), c.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			<span class="number">4</span> === c.readyState &amp;&amp; (<span class="number">200</span> === c.status ? b(<span class="literal">null</span>, c.responseText) : b(&#123;</span><br><span class="line">				status: c.status,</span><br><span class="line">				errorMessage: d</span><br><span class="line">			&#125;, <span class="literal">null</span>))</span><br><span class="line">		&#125;) : (c.overrideMimeType &amp;&amp; c.overrideMimeType(<span class="string">"text/plain; charset\x3dutf-8"</span>), c.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			<span class="number">0</span> &lt;= c._timeoutId &amp;&amp; clearTimeout(c._timeoutId);</span><br><span class="line">			<span class="number">4</span> === c.readyState &amp;&amp; (<span class="number">200</span> === c.status ? b(<span class="literal">null</span>, c.responseText) : b(&#123;</span><br><span class="line">				status: c.status,</span><br><span class="line">				errorMessage: d</span><br><span class="line">			&#125;, <span class="literal">null</span>))</span><br><span class="line">		&#125;, c.onerror = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			b(&#123;</span><br><span class="line">				status: c.status,</span><br><span class="line">				errorMessage: d</span><br><span class="line">			&#125;, <span class="literal">null</span>)</span><br><span class="line">		&#125;, <span class="keyword">void</span> <span class="number">0</span> === c.ontimeout &amp;&amp; (c._timeoutId = setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			c.ontimeout()</span><br><span class="line">		&#125;, c.timeout)), c.ontimeout = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			b(&#123;</span><br><span class="line">				status: c.status,</span><br><span class="line">				errorMessage: <span class="string">"Request timeout: "</span> + d</span><br><span class="line">			&#125;, <span class="literal">null</span>)</span><br><span class="line">		&#125;);</span><br><span class="line">		c.send(<span class="literal">null</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>问题根源就在于XHR不支持加载本地file，其实我们也没有必要一定使用XHR方式去加载，而是使用js中的一些File API去加载。当然我们也可以自己创建一个轻量级的web server，来将file域的文件转化为http形式。</p>
+<p>现在想一想当初真的走了很多弯路。</p>
+<p>在<a href="https://stackoverflow.com/questions/7683596/xmlhttprequest-for-local-files?answertab=votes#tab-top" target="_blank" rel="noopener">stackoverflow</a>上相关问题的一个回答完美的总结了该问题：</p>
+<blockquote>
+<p>Historically, you can’t query for local files from JavaScript (or shouldn’t be allowed to, or something’s odd). This would be a serious breach of security.</p>
+</blockquote>
+<blockquote>
+<p>There are only a few circumstances where you can do this, but in general they involve specific security settings requiring to be set for your browser, to either lift the limitation or to notify the current page’s execution process that that is is granted this exceptional right. This is for instance doable in Firefox by editing the properties. It’s also commonly OK when developing browser extensions (for instance for Chrome or FF) if they request the file access permissions.</p>
+</blockquote>
+<blockquote>
+<p>Another way to go around this limitation is to host a local web-server, and to declare virtual hosts on it to be able to do this sort of AJAX request to fetch local files. It’s quite common for web-developers to resort to this trick (more like a standard, really) to have the benefits of local development but at the same time replicate a production system. You could for instance use a lightweight web-server like Jetty.</p>
+</blockquote>
+<blockquote>
+</blockquote>
 
       
     </div>
