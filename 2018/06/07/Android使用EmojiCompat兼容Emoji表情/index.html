@@ -90,7 +90,10 @@
 <meta property="og:image" content="http://lisongda.com/images/25.png">
 <meta property="og:image" content="http://lisongda.com/images/26.png">
 <meta property="og:image" content="http://lisongda.com/images/27.png">
-<meta property="og:updated_time" content="2018-06-07T13:06:18.521Z">
+<meta property="og:image" content="http://lisongda.com/images/28.png">
+<meta property="og:image" content="http://lisongda.com/images/29.png">
+<meta property="og:image" content="http://lisongda.com/images/30.png">
+<meta property="og:updated_time" content="2018-06-08T04:27:41.970Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android使用EmojiCompat兼容Emoji表情">
 <meta name="twitter:description" content="移动设备之间文字聊天可以自由使用Emoji表情，但是在一些低版本的Android设备上，如果接收到无法识别的emoji字符，就会显示乱码☐。我们的项目中就存在这样的问题，部分手机无法识别对方发来的Emoji表情。如下图所示：  上图是Emoji表情的发送方（小米手机），一共涉及到四个Emoji表情。 再看下Emoji表情的接收方（Motorola）：  正如我们看到的，除了😊，其他Emoji表情">
@@ -375,6 +378,50 @@
 <p>正如我们看到的，除了😊，其他Emoji表情全部显示不出来。</p>
 <p>而我们想要的效果如下：</p>
 <p><img src="/images/27.png" alt=""></p>
+<p><code>EmojiCompat</code>兼容库提供了向下兼容的Emoji表情，使其可以在Android 4.4（API 19）及以上版本正常显示。</p>
+<p>下面介绍如何使用<code>EmojiCompat</code>完成上述效果。</p>
+<p>每个Emoji表情对应一个unicode字符，<code>EmojiCompat</code>在系统字体无法解析unicode字符时，会使用<code>EmojiSpans</code>标识它，并且转化为emoji图案。</p>
+<p>具体过程如下图（图片出自Android官网）：</p>
+<p><img src="/images/28.png" alt=""></p>
+<p>可以使用两种方式来配置<code>EmojiCompat</code>：</p>
+<ul>
+<li>Downloadable fonts configuration</li>
+<li>Bundled fonts configuration</li>
+</ul>
+<h3 id="Downloadable-fonts-configuration"><a href="#Downloadable-fonts-configuration" class="headerlink" title="Downloadable fonts configuration"></a>Downloadable fonts configuration</h3><p>使用<code>the Downloadable Fonts support library</code>来下载Emoji字体。它也会把最新的Emoji的表情下载下来。</p>
+<p>首先需要在<code>build.gradle</code>添加依赖：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    ...</span><br><span class="line">    compile &quot;com.android.support:support-emoji:27.1.1&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接下来执行<code>EmojiCompat</code>初始化的操作，一共分三步：</p>
+<p>1.创建<code>FontRequest</code>实例.<a href="https://developer.android.com/guide/topics/ui/look-and-feel/downloadable-fonts#top_of_page" target="_blank" rel="noopener">详见</a></p>
+<p>2.通过Context和<code>FontRequest</code>实例创建<code>FontRequestEmojiCompatConfig</code>实例</p>
+<p>3.调用<code>EmojiCompat</code>的<code>init</code>方法完成初始化</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">FontRequest fontRequest = <span class="keyword">new</span> FontRequest(</span><br><span class="line">              <span class="string">"com.example.fontprovider"</span>,</span><br><span class="line">              <span class="string">"com.example"</span>,</span><br><span class="line">              <span class="string">"emoji compat Font Query"</span>, CERTIFICATES);</span><br><span class="line">       EmojiCompat.Config config = <span class="keyword">new</span> FontRequestEmojiCompatConfig(<span class="keyword">this</span>, fontRequest);</span><br><span class="line">       EmojiCompat.init(config);</span><br></pre></td></tr></table></figure>
+<p>在<code>EmojiCompat</code>初始化后，将xml文件中的控件替换为<code>EmojiCompat</code>相关控件。如<code>TextView</code>-&gt;<code>EmojiTextView</code>。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">android.support.text.emoji.widget.EmojiTextView</span></span></span><br><span class="line"><span class="tag">   <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">   <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">android.support.text.emoji.widget.EmojiEditText</span></span></span><br><span class="line"><span class="tag">   <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">   <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">android.support.text.emoji.widget.EmojiButton</span></span></span><br><span class="line"><span class="tag">   <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">   <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Library-components"><a href="#Library-components" class="headerlink" title="Library components"></a>Library components</h3><p>EmojiCompat库包含以下组件：</p>
+<p><img src="/images/29.png" alt=""></p>
+<p><code>Widgets</code>：<code>EmojiEditText</code>, <code>EmojiTextView</code>, <code>EmojiButton</code></p>
+<p><code>EmojiCompat</code>：核心部分，提供对外所有回调，是连接各部分的桥梁</p>
+<p><code>EmojiCompat.Config</code>：初始化单例</p>
+<p><code>EmojiSpan</code>：<code>ReplacementSpan</code>的子类，用于渲染emoji表情</p>
+<p><code>EmojiCompat Font</code>：使用字体来显示emoji</p>
+<h3 id="初始化配置时的可选项"><a href="#初始化配置时的可选项" class="headerlink" title="初始化配置时的可选项"></a>初始化配置时的可选项</h3><p><code>setReplaceAll()</code>：参数可设true或者false，决定是否要把所有<code>EmojiSpans</code>可以找到的emoji表情都替换，默认值为false，表示如果系统可以识别该emoji表情，则不替换。</p>
+<p><code>setEmojiSpanIndicatorEnabled()</code>：参数可设true或者false，如果为true，表示把<code>EmojiSpan</code>识别的emoji表情使用特定的背景色标标识出来。主要用于调试。</p>
+<p><code>setEmojiSpanIndicatorColor()</code>：特定标识的颜色，默认为绿色。</p>
+<p><code>registerInitCallback</code>：注册<code>EmojiCompat</code>初始化的回调。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">EmojiCompat.Config config = <span class="keyword">new</span> FontRequestEmojiCompatConfig(...)</span><br><span class="line">       .setReplaceAll(<span class="keyword">true</span>)</span><br><span class="line">       .setEmojiSpanIndicatorEnabled(<span class="keyword">true</span>)</span><br><span class="line">       .setEmojiSpanIndicatorColor(Color.GREEN)</span><br><span class="line">       .registerInitCallback(<span class="keyword">new</span> InitCallback() &#123;...&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="Bundled-fonts-configuration"><a href="#Bundled-fonts-configuration" class="headerlink" title="Bundled fonts configuration"></a>Bundled fonts configuration</h3><p>使用<code>Bundled fonts configuration</code>可以直接本地加载emoji字体，无需下载。但是缺点也很明显，会增加我们的apk大小。使用这种方式会把emoji字体直接放入assets目录下。如图：</p>
+<p><img src="/images/30.png" alt=""></p>
+<p>NotoColorEmojiCompat字体让我们的apk体积增加了6M多。。。</p>
+<p>anyway，先看看这种方法怎么用吧。</p>
+<p>首先仍然是添加依赖：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    ...</span><br><span class="line">    compile &quot;com.android.support:support-emoji-bundled:$version&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后是<code>EmojiCompat</code>的初始化操作：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">EmojiCompat.Config config = <span class="keyword">new</span> BundledEmojiCompatConfig(<span class="keyword">this</span>);</span><br><span class="line">EmojiCompat.init(config);</span><br></pre></td></tr></table></figure>
+<p>在<code>EmojiCompat</code>初始化后，将xml文件中的控件替换为<code>EmojiCompat</code>相关控件。如<code>TextView</code>-&gt;<code>EmojiTextView</code>。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">android.support.text.emoji.widget.EmojiTextView</span></span></span><br><span class="line"><span class="tag">   <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">   <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">android.support.text.emoji.widget.EmojiEditText</span></span></span><br><span class="line"><span class="tag">   <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">   <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">android.support.text.emoji.widget.EmojiButton</span></span></span><br><span class="line"><span class="tag">   <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">   <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Using-EmojiCompat-without-widgets"><a href="#Using-EmojiCompat-without-widgets" class="headerlink" title="Using EmojiCompat without widgets"></a>Using EmojiCompat without widgets</h3><p><code>EmojiCompat</code>使用<code>EmojiSpan</code>生成emoji表情。<code>EmojiCompat</code>提供了一个方法用于将emoji字符转化为<code>Spanned</code>实例，使用这个方法，我们可以处理或者缓存这个<code>Spanned</code>实例。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CharSequence processed = EmojiCompat.get().process(<span class="string">"neutral face \uD83D\uDE10"</span>);</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -470,8 +517,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -545,6 +601,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Downloadable-fonts-configuration"><span class="nav-number">1.</span> <span class="nav-text">Downloadable fonts configuration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Library-components"><span class="nav-number">2.</span> <span class="nav-text">Library components</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化配置时的可选项"><span class="nav-number">3.</span> <span class="nav-text">初始化配置时的可选项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bundled-fonts-configuration"><span class="nav-number">4.</span> <span class="nav-text">Bundled fonts configuration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Using-EmojiCompat-without-widgets"><span class="nav-number">5.</span> <span class="nav-text">Using EmojiCompat without widgets</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
