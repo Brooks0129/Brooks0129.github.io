@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://lisongda.com/"/>
-  <updated>2018-06-08T04:27:41.970Z</updated>
+  <updated>2018-10-30T07:14:41.773Z</updated>
   <id>http://lisongda.com/</id>
   
   <author>
@@ -15,6 +15,20 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android输入法从零到一系列（之一）</title>
+    <link href="http://lisongda.com/2018/10/30/Android%E8%BE%93%E5%85%A5%E6%B3%95%E4%BB%8E%E9%9B%B6%E5%88%B0%E4%B8%80%E7%B3%BB%E5%88%97%EF%BC%88%E4%B9%8B%E4%B8%80%EF%BC%89/"/>
+    <id>http://lisongda.com/2018/10/30/Android输入法从零到一系列（之一）/</id>
+    <published>2018-10-30T07:14:41.000Z</published>
+    <updated>2018-10-30T07:14:41.773Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>Android使用EmojiCompat兼容Emoji表情</title>
@@ -72,9 +86,9 @@
     <link href="http://lisongda.com/2018/05/19/%E7%BC%96%E7%A8%8B%E5%B8%B8%E7%94%A8%E8%AF%8D%E6%B1%87/"/>
     <id>http://lisongda.com/2018/05/19/编程常用词汇/</id>
     <published>2018-05-19T07:03:16.000Z</published>
-    <updated>2018-07-03T11:44:17.415Z</updated>
+    <updated>2018-07-17T12:30:07.923Z</updated>
     
-    <content type="html"><![CDATA[<table><thead><tr><th>英文</th><th>中文</th></tr></thead><tbody><tr><td>expressiveness</td><td>表达式</td></tr><tr><td>scalebility</td><td>可扩展性</td></tr><tr><td>migration</td><td>迁移</td></tr><tr><td>footprint</td><td>占用空间</td></tr><tr><td>boilerplate</td><td>模版</td></tr><tr><td>wildcard</td><td>通配符</td></tr></tbody></table>]]></content>
+    <content type="html"><![CDATA[<table><thead><tr><th>英文</th><th>中文</th></tr></thead><tbody><tr><td>expressiveness</td><td>表达式</td></tr><tr><td>scalebility</td><td>可扩展性</td></tr><tr><td>migration</td><td>迁移</td></tr><tr><td>footprint</td><td>占用空间</td></tr><tr><td>boilerplate</td><td>模版</td></tr><tr><td>wildcard</td><td>通配符</td></tr><tr><td>line-wrapped</td><td>自动换行</td></tr><tr><td>idiomatic</td><td>符合语法的</td></tr><tr><td>semicolon</td><td>分号</td></tr><tr><td>trivial</td><td>不重要的</td></tr></tbody></table>]]></content>
     
     <summary type="html">
     
